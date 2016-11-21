@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>migway</groupId>
+    <artifactId>migway-demos</artifactId>
+    <version>0.6.0-SNAPSHOT</version>
+  </parent>
+  <groupId>migway.demos</groupId>
+  <artifactId>migway-demo-tanklab</artifactId>
+  <name>migway-demo-tanklab</name>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.camel</groupId>
+  		<artifactId>camel-core</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>migway</groupId>
+  		<artifactId>migway-utils</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>migway</groupId>
+  		<artifactId>migway-core</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>migway.plugins</groupId>
+  		<artifactId>plugin-dds</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>migway.plugins</groupId>
+  		<artifactId>plugin-hla</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>se.pitch.camelHla</groupId>
+  		<artifactId>camelHla</artifactId>
+  	</dependency>
+  </dependencies>
+</project>

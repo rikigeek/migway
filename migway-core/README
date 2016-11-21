@@ -1,0 +1,7 @@
+Author: Sébastien Tissier - 2016-07-26
+--------------------------------------
+
+The file "partialPojoList.jar" is made from the demos/pojo project.
+It doesn't include all class from this project. 
+It's used in the unit test migway.core.pojoloader.PojoClassLoaderTest
+

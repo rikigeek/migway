@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+  <enumStructure name="ns.enumA">
+    <globalRemoteName>ns.enumA</globalRemoteName>
+    <elements/>
+    <mig:basic>
+      <basicType>INT</basicType>
+    </mig:basic>
+    <enumElements>
+      <enumValue>MON</enumValue>
+      <enumValue>TUE</enumValue>
+      <enumValue>WED</enumValue>
+      <enumValue>THU</enumValue>
+      <enumValue>FRI</enumValue>
+      <enumValue>SAT</enumValue>
+      <enumValue>SUN</enumValue>
+    </enumElements>
+  </enumStructure>
+  <classStructure name="ns.classC">
+    <interfaceList>HLA</interfaceList>
+    <interfaceList>DDS</interfaceList>
+    <remoteName>class_c</remoteName>
+    <remoteName>classeC</remoteName>
+    <elements>
+      <element field="moves">
+        <mig:array>
+          <first>0</first>
+          <last>50</last>
+          <mig:ref>
+            <structureName>ns.classB</structureName>
+          </mig:ref>
+        </mig:array>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>moves</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="ns.classB">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>class_b</remoteName>
+    <elements>
+      <element field="x">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>x</sharedRemoteName>
+      </element>
+      <element field="y">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>y</sharedRemoteName>
+      </element>
+      <element field="z">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>z</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="ns.classA">
+    <globalRemoteName>ns.classA</globalRemoteName>
+    <elements>
+      <element field="basicInt1">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>basicInt1</sharedRemoteName>
+      </element>
+      <element field="refClassB">
+        <mig:ref>
+          <structureName>ns.classB</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>refClassB</sharedRemoteName>
+      </element>
+      <element field="arrayString1">
+        <mig:array>
+          <first>0</first>
+          <last>0</last>
+          <mig:basic>
+            <basicType>STRING</basicType>
+          </mig:basic>
+        </mig:array>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>arrayString1</sharedRemoteName>
+      </element>
+      <element field="arrayClassC">
+        <mig:array>
+          <first>0</first>
+          <last>10</last>
+          <mig:ref>
+            <structureName>ns.classC</structureName>
+          </mig:ref>
+        </mig:array>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>arrayClassC</sharedRemoteName>
+      </element>
+      <element field="arrayArray1">
+        <mig:array>
+          <first>1</first>
+          <last>6</last>
+          <mig:array>
+            <first>10</first>
+            <last>10</last>
+            <mig:basic>
+              <basicType>INT</basicType>
+            </mig:basic>
+          </mig:array>
+        </mig:array>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>arrayArray1</sharedRemoteName>
+      </element>
+      <element field="day">
+        <mig:ref>
+          <structureName>ns.enumA</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>day</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <unionStructure name="ns.unionA">
+    <globalRemoteName>ns.unionA</globalRemoteName>
+    <interfaceList>DDS</interfaceList>
+    <remoteName>union_A</remoteName>
+    <elements>
+      <element field="choice">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>choice</sharedRemoteName>
+      </element>
+      <element field="static">
+        <mig:ref>
+          <structureName>ns.classB</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>static</sharedRemoteName>
+      </element>
+      <element field="mobile">
+        <mig:ref>
+          <structureName>ns.classC</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>mobile</sharedRemoteName>
+      </element>
+    </elements>
+    <discriminant field="choice">
+      <mig:basic>
+        <basicType>BOOLEAN</basicType>
+      </mig:basic>
+      <bigEndian>false</bigEndian>
+      <sharedRemoteName>choice</sharedRemoteName>
+    </discriminant>
+    <alternatives>
+      <entry>
+        <key>true</key>
+        <value>mobile</value>
+      </entry>
+      <entry>
+        <key>false</key>
+        <value>static</value>
+      </entry>
+    </alternatives>
+  </unionStructure>
+</mig:configuration>

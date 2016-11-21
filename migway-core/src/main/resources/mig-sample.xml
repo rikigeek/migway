@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+  <classStructure name="edu.cyc14.essais.pojo.MyPojo">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>edu.cyc14.essais.pojo.MyPojo</remoteName>
+    <elements>
+      <element field="ok">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>ok</sharedRemoteName>
+      </element>
+      <element field="value">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>value</sharedRemoteName>
+      </element>
+      <element field="name">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>name</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.DdsPojo">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>edu.cyc14.essais.pojo.DdsPojo</remoteName>
+    <elements>
+      <element field="number">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>number</sharedRemoteName>
+      </element>
+      <element field="acknowledged">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>acknowledged</sharedRemoteName>
+      </element>
+      <element field="description">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>description</sharedRemoteName>
+      </element>
+      <element field="precision">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>precision</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+</mig:configuration>

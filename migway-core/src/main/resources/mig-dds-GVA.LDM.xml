@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+  <enumStructure name="LDM.ResourceType_E">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.ResourceType_E</remoteName>
+    <elements/>
+    <mig:basic>
+      <basicType>INT</basicType>
+    </mig:basic>
+    <enumElements>
+      <enumValue>RESOURCE_TYPE__APPLICATION</enumValue>
+      <enumValue>RESOURCE_TYPE__BRAKE</enumValue>
+      <enumValue>RESOURCE_TYPE__CREWSTATION</enumValue>
+      <enumValue>RESOURCE_TYPE__ACOUSTIC</enumValue>
+      <enumValue>RESOURCE_TYPE__CAMERA</enumValue>
+    </enumElements>
+  </enumStructure>
+  <classStructure name="LDM.SoftwareVersionDescriptor_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.SoftwareVersionDescriptor_T</remoteName>
+    <elements>
+      <element field="softwareModuleName">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>softwareModuleName</sharedRemoteName>
+      </element>
+      <element field="versionNumber">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>versionNumber</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="LDM.VsiTime_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.VsiTime_T</remoteName>
+    <elements>
+      <element field="seconds">
+        <mig:basic>
+          <basicType>LONG</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>seconds</sharedRemoteName>
+      </element>
+      <element field="nanoseconds">
+        <mig:basic>
+          <basicType>UNSIGNED_INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>nanoseconds</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="LDM.navigation.NavAttitudeState_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.navigation.NavAttitudeState_T</remoteName>
+    <elements>
+      <element field="pitch">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>pitch</sharedRemoteName>
+      </element>
+      <element field="roll">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>roll</sharedRemoteName>
+      </element>
+      <element field="yaw">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>yaw</sharedRemoteName>
+      </element>
+      <element field="pitchRate">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>pitchRate</sharedRemoteName>
+      </element>
+      <element field="rollRate">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>rollRate</sharedRemoteName>
+      </element>
+      <element field="yawRate">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>yawRate</sharedRemoteName>
+      </element>
+      <element field="navElementId">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>navElementId</sharedRemoteName>
+      </element>
+      <element field="navElementIdType">
+        <mig:ref>
+          <structureName>LDM.ResourceType_E</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>navElementIdType</sharedRemoteName>
+      </element>
+      <element field="recentlyChanged">
+        <mig:array>
+          <first>0</first>
+          <last>10</last>
+          <mig:ref>
+            <structureName>LDM.navigation.NavAttitudeParameterName_E</structureName>
+          </mig:ref>
+        </mig:array>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>recentlyChanged</sharedRemoteName>
+      </element>
+      <element field="timeOfDataGeneration">
+        <mig:ref>
+          <structureName>LDM.VsiTime_T</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>timeOfDataGeneration</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <enumStructure name="LDM.navigation.NavPositionParameterName_E">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.navigation.NavPositionParameterName_E</remoteName>
+    <elements/>
+    <mig:basic>
+      <basicType>INT</basicType>
+    </mig:basic>
+    <enumElements>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__LONGITUDE</enumValue>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__LATITUDE</enumValue>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__HEIGHT</enumValue>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__POSITION_ERROR</enumValue>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__HEIGHT_ERROR</enumValue>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__UTC_TIME_OF_DAY</enumValue>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__DATE</enumValue>
+      <enumValue>NAV_POSITION_PARAMETER_NAME__DISTANCE_TRAVELLED</enumValue>
+    </enumElements>
+  </enumStructure>
+  <classStructure name="LDM.CommonCapability_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.CommonCapability_T</remoteName>
+    <elements>
+      <element field="manufacturer">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>manufacturer</sharedRemoteName>
+      </element>
+      <element field="productName">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>productName</sharedRemoteName>
+      </element>
+      <element field="description">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>description</sharedRemoteName>
+      </element>
+      <element field="serialNumber">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>serialNumber</sharedRemoteName>
+      </element>
+      <element field="issue">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>issue</sharedRemoteName>
+      </element>
+      <element field="modStrike">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>modStrike</sharedRemoteName>
+      </element>
+      <element field="natoStockNumber">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>natoStockNumber</sharedRemoteName>
+      </element>
+      <element field="softwareVersions">
+        <mig:array>
+          <first>0</first>
+          <last>20</last>
+          <mig:ref>
+            <structureName>LDM.SoftwareVersionDescriptor_T</structureName>
+          </mig:ref>
+        </mig:array>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>softwareVersions</sharedRemoteName>
+      </element>
+      <element field="supportedModes">
+        <mig:ref>
+          <structureName>LDM.ModeCapability_T</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>supportedModes</sharedRemoteName>
+      </element>
+      <element field="timeOfDataGeneration">
+        <mig:ref>
+          <structureName>LDM.VsiTime_T</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>timeOfDataGeneration</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="LDM.ModeCapability_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.ModeCapability_T</remoteName>
+    <elements>
+      <element field="isOffCapable">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>isOffCapable</sharedRemoteName>
+      </element>
+      <element field="isOnCapable">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>isOnCapable</sharedRemoteName>
+      </element>
+      <element field="isStandbyCapable">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>isStandbyCapable</sharedRemoteName>
+      </element>
+      <element field="isMaintenanceCapable">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>isMaintenanceCapable</sharedRemoteName>
+      </element>
+      <element field="isTrainingCapable">
+        <mig:basic>
+          <basicType>BOOLEAN</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>isTrainingCapable</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="LDM.navigation.NavErrorDataType_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.navigation.NavErrorDataType_T</remoteName>
+    <elements>
+      <element field="Error">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Error</sharedRemoteName>
+      </element>
+      <element field="ErrorType">
+        <mig:ref>
+          <structureName>LDM.navigation.NavErrorType_E</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>ErrorType</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <enumStructure name="LDM.navigation.NavErrorType_E">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.navigation.NavErrorType_E</remoteName>
+    <elements/>
+    <mig:basic>
+      <basicType>INT</basicType>
+    </mig:basic>
+    <enumElements>
+      <enumValue>NAV_ERROR_TYPE__GDOP</enumValue>
+      <enumValue>NAV_ERROR_TYPE__FOM</enumValue>
+      <enumValue>NAV_ERROR_TYPE__CEP</enumValue>
+      <enumValue>NAV_ERROR_TYPE__ERROR_RATING</enumValue>
+      <enumValue>NAV_ERROR_TYPE__NONE_AVAILABLE</enumValue>
+    </enumElements>
+  </enumStructure>
+  <classStructure name="LDM.navigation.NavPositionState_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.navigation.NavPositionState_T</remoteName>
+    <elements>
+      <element field="navElementId">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>navElementId</sharedRemoteName>
+      </element>
+      <element field="navElementIdType">
+        <mig:ref>
+          <structureName>LDM.navigation.ResourceType_E</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>navElementIdType</sharedRemoteName>
+      </element>
+      <element field="longitude">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>longitude</sharedRemoteName>
+      </element>
+      <element field="latitude">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>latitude</sharedRemoteName>
+      </element>
+      <element field="height">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>height</sharedRemoteName>
+      </element>
+      <element field="positionError">
+        <mig:ref>
+          <structureName>LDM.navigation.NavErrorDataType_T</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>positionError</sharedRemoteName>
+      </element>
+      <element field="heightError">
+        <mig:ref>
+          <structureName>LDM.navigation.NavErrorDataType_T</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>heightError</sharedRemoteName>
+      </element>
+      <element field="utcTimeOfDay">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>utcTimeOfDay</sharedRemoteName>
+      </element>
+      <element field="date">
+        <mig:basic>
+          <basicType>STRING</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>date</sharedRemoteName>
+      </element>
+      <element field="distanceTravelled">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>distanceTravelled</sharedRemoteName>
+      </element>
+      <element field="recentlyChanged">
+        <mig:array>
+          <first>0</first>
+          <last>10</last>
+          <mig:ref>
+            <structureName>LDM.navigation.NavPositionParameterName_E</structureName>
+          </mig:ref>
+        </mig:array>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>recentlyChanged</sharedRemoteName>
+      </element>
+      <element field="timeOfDataGeneration">
+        <mig:ref>
+          <structureName>LDM.VsiTime_T</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>timeOfDataGeneration</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <enumStructure name="LDM.navigation.NavAttitudeParameterName_E">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.navigation.NavAttitudeParameterName_E</remoteName>
+    <elements/>
+    <mig:basic>
+      <basicType>INT</basicType>
+    </mig:basic>
+    <enumElements>
+      <enumValue>NAV_ATTITUDE_PARAMETER_NAME__PITCH</enumValue>
+      <enumValue>NAV_ATTITUDE_PARAMETER_NAME__ROLL</enumValue>
+      <enumValue>NAV_ATTITUDE_PARAMETER_NAME__YAW</enumValue>
+      <enumValue>NAV_ATTITUDE_PARAMETER_NAME__PITCH_RATE</enumValue>
+      <enumValue>NAV_ATTITUDE_PARAMETER_NAME__ROLL_RATE</enumValue>
+      <enumValue>NAV_ATTITUDE_PARAMETER_NAME__YAW_RATE</enumValue>
+    </enumElements>
+  </enumStructure>
+  <classStructure name="LDM.platform.PlatformCapability_T">
+    <interfaceList>DDS</interfaceList>
+    <remoteName>LDM.platform.PlatformCapability_T</remoteName>
+    <elements>
+      <element field="resourceId">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>resourceId</sharedRemoteName>
+      </element>
+      <element field="resourceIdType">
+        <mig:ref>
+          <structureName>LDM.ResourceType_E</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>resourceIdType</sharedRemoteName>
+      </element>
+      <element field="coreCapability">
+        <mig:ref>
+          <structureName>LDM.CommonCapability_T</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>coreCapability</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+</mig:configuration>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+  <classStructure name="tanklab.Tank">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>Tank</remoteName>
+    <elements>
+      <element field="orientation">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>orientation</sharedRemoteName>
+      </element>
+      <element field="damage">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>damage</sharedRemoteName>
+      </element>
+      <element field="x">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>x</sharedRemoteName>
+      </element>
+      <element field="y">
+        <mig:basic>
+          <basicType>INT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>y</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+</mig:configuration>

@@ -1,0 +1,4 @@
+/target/
+/pojos/**/*.java
+/config.xml
+/config/

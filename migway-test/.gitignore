@@ -1,0 +1,13 @@
+/target/
+/Log/
+/test/
+/HLADocs/
+/*.recorder
+/mig-dds-GVA.LDM.xml
+/mig-hla-RPRFOM.edu.xml
+/mig-hla.tanklab.xml
+/mig-key-demo-tanklab.xml
+/mig-map-demo-tanklab.xml
+/mig-map-sample.xml
+/mig-sample.xml
+/mig-testingconfig.xml

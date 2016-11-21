@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+	<mappings destination="tanklab.Tank">
+		<destinationKey type="MESSAGE_HEADER">
+			<element>instanceHandle</element>
+		</destinationKey>
+    <source name="LDM.navigation.NavAttitudeState_T">
+      <sourceKey type="POJO_ELEMENT">
+        <element>navElementId</element>
+      </sourceKey>
+    </source>
+    <source name="LDM.navigation.NavPositionState_T">
+      <sourceKey type="POJO_ELEMENT">
+        <element>navElementId</element>
+      </sourceKey>
+    </source>
+		<elementMappings>
+			<destination name="x">
+				<structureName>tanklab.Tank</structureName>
+			</destination>
+			<source name="longitude">
+				<structureName>LDM.navigation.NavPositionState_T</structureName>
+			</source>
+		</elementMappings>
+		<elementMappings>
+			<destination name="y">
+				<structureName>tanklab.Tank</structureName>
+			</destination>
+			<source name="latitude">
+				<structureName>LDM.navigation.NavPositionState_T</structureName>
+			</source>
+		</elementMappings>
+		<elementMappings>
+			<destination name="orientation">
+				<structureName>tanklab.Tank</structureName>
+			</destination>
+			<source name="yaw">
+				<structureName>LDM.navigation.NavAttitudeState_T</structureName>
+			</source>
+		</elementMappings>
+	</mappings>
+</mig:configuration>

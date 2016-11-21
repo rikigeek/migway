@@ -1,0 +1,160 @@
+  typedef string<100> String100_T;
+  typedef string<20> String20_T;
+  typedef string<200> String200_T;
+  typedef string<500> String500_T;
+  typedef string<50> String50_T;
+
+  enum  ResourceType_E
+  {
+    RESOURCE_TYPE__APPLICATION,
+    RESOURCE_TYPE__BRAKE,
+    RESOURCE_TYPE__CREWSTATION,
+    RESOURCE_TYPE__ACOUSTIC,
+    RESOURCE_TYPE__CAMERA,
+    RESOURCE_TYPE__ECM,
+    RESOURCE_TYPE__ENGINE,
+    RESOURCE_TYPE__ESM,
+    RESOURCE_TYPE__EXHAUST,
+    RESOURCE_TYPE__FUEL,
+    RESOURCE_TYPE__HUMS,
+    RESOURCE_TYPE__LRF,
+    RESOURCE_TYPE__LTD,
+    RESOURCE_TYPE__MET_SENSOR,
+    RESOURCE_TYPE__MOUNT,
+    RESOURCE_TYPE__NAV_UNIT,
+    RESOURCE_TYPE__NBC,
+    RESOURCE_TYPE__PLOT,
+    RESOURCE_TYPE__POWER,
+    RESOURCE_TYPE__RADAR,
+    RESOURCE_TYPE__RESOURCE_CONTROLLER,
+    RESOURCE_TYPE__RESOURCE_LIST,
+    RESOURCE_TYPE__ROUTE,
+    RESOURCE_TYPE__SLAVE_SETUP,
+    RESOURCE_TYPE__TRANSMISSION,
+    RESOURCE_TYPE__TURBO,
+    RESOURCE_TYPE__WEAPON,
+    RESOURCE_TYPE__CHARGER,
+    RESOURCE_TYPE__BATTERY,
+    RESOURCE_TYPE__GENERATOR,
+    RESOURCE_TYPE__FUEL_CELL,
+    RESOURCE_TYPE__INVERTER,
+    RESOURCE_TYPE__CONSUMER,
+    RESOURCE_TYPE__POWERNODE,
+    RESOURCE_TYPE__CHANNEL,
+    RESOURCE_TYPE__DETECTION,
+    RESOURCE_TYPE__TRACK,
+    RESOURCE_TYPE__DETECTION_CHARACTERISTICS,
+    RESOURCE_TYPE__TRACK_CHARACTERISTICS_RT
+  };
+  
+  typedef struct tag_VsiTime_T
+  {
+    long long seconds;
+    unsigned long nanoseconds;
+  } VsiTime_T;
+
+  typedef struct tag_SoftwareVersionDescriptor_T
+  {
+    String50_T softwareModuleName;
+    String50_T versionNumber;
+  } SoftwareVersionDescriptor_T;
+
+  typedef struct tag_ModeCapability_T
+  {
+    boolean isOffCapable;
+    boolean isOnCapable;
+    boolean isStandbyCapable;
+    boolean isMaintenanceCapable;
+    boolean isTrainingCapable;
+  } ModeCapability_T;
+
+  typedef struct tag_CommonCapability_T
+  {
+    String50_T manufacturer;
+    String50_T productName;
+    String200_T description;
+    String50_T serialNumber;
+    String50_T issue;
+    String50_T modStrike;
+    String20_T natoStockNumber;
+    sequence<SoftwareVersionDescriptor_T,20> softwareVersions;
+    ModeCapability_T supportedModes;
+    VsiTime_T timeOfDataGeneration;
+  } CommonCapability_T;
+
+  enum  NavPositionParameterName_E
+  {
+    NAV_POSITION_PARAMETER_NAME__LONGITUDE,
+    NAV_POSITION_PARAMETER_NAME__LATITUDE,
+    NAV_POSITION_PARAMETER_NAME__HEIGHT,
+    NAV_POSITION_PARAMETER_NAME__POSITION_ERROR,
+    NAV_POSITION_PARAMETER_NAME__HEIGHT_ERROR,
+    NAV_POSITION_PARAMETER_NAME__UTC_TIME_OF_DAY,
+    NAV_POSITION_PARAMETER_NAME__DATE,
+    NAV_POSITION_PARAMETER_NAME__DISTANCE_TRAVELLED
+  };
+  enum  NavErrorType_E
+  {
+    NAV_ERROR_TYPE__GDOP,
+    NAV_ERROR_TYPE__FOM,
+    NAV_ERROR_TYPE__CEP,
+    NAV_ERROR_TYPE__ERROR_RATING,
+    NAV_ERROR_TYPE__NONE_AVAILABLE
+  };
+
+  typedef struct tag_NavErrorDataType_T
+  {
+    double Error;
+    NavErrorType_E ErrorType;
+  } NavErrorDataType_T;
+  
+  enum  NavAttitudeParameterName_E
+  {
+    NAV_ATTITUDE_PARAMETER_NAME__PITCH,
+    NAV_ATTITUDE_PARAMETER_NAME__ROLL,
+    NAV_ATTITUDE_PARAMETER_NAME__YAW,
+    NAV_ATTITUDE_PARAMETER_NAME__PITCH_RATE,
+    NAV_ATTITUDE_PARAMETER_NAME__ROLL_RATE,
+    NAV_ATTITUDE_PARAMETER_NAME__YAW_RATE
+  };
+
+  struct PlatformCapability_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    CommonCapability_T coreCapability;
+  };
+#pragma keylist PlatformCapability_T resourceId resourceIdType
+
+  struct NavPositionState_T
+  {
+    long navElementId;
+    ResourceType_E navElementIdType;
+    double longitude;
+    double latitude;
+    double height;
+    NavErrorDataType_T positionError;
+    NavErrorDataType_T heightError;
+    double utcTimeOfDay;
+    String20_T date;
+    double distanceTravelled;
+    sequence<NavPositionParameterName_E,10> recentlyChanged;
+    VsiTime_T timeOfDataGeneration;
+  };
+#pragma keylist NavPositionState_T navElementId navElementIdType
+
+  struct NavAttitudeState_T
+  {
+    double pitch;
+    double roll;
+    double yaw;
+    double pitchRate;
+    double rollRate;
+    double yawRate;
+    long navElementId;
+    ResourceType_E navElementIdType;
+    sequence<NavAttitudeParameterName_E,10> recentlyChanged;
+    VsiTime_T timeOfDataGeneration;
+  };
+#pragma keylist NavAttitudeState_T navElementId navElementIdType
+

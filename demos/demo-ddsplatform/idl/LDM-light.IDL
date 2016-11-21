@@ -1,0 +1,2086 @@
+// DDS Land Data Model IDL code generator (v3)
+// Generating code for OpenSplice at Tue Jul 02 16:10:22 BST 2013
+
+
+// <u>Land Data Model 2009  IDL definitions</u>
+// 
+// 
+// The top level module is subdivided into functionally related 
+// modules.  There are some definitions at the VSI module level that 
+// are applicable to all submodules.  
+// 
+// 
+// This model is processed by an IDL code generating script.  The 
+// resulting file is to provide a vendor neutral specification for 
+// the vendor supplied code generators that compile IDL into a 
+// programming language such as C++ or Java.  The script currently 
+// includes annotations for PrismTech and RTI DCPS tools.  
+// 
+module LDM
+{
+
+  // An enumeration of all the possible resource types used in the 
+  // system
+  // 
+  enum  ResourceType_E
+  {
+    RESOURCE_TYPE__APPLICATION,
+    RESOURCE_TYPE__BRAKE,
+    RESOURCE_TYPE__CREWSTATION,
+    RESOURCE_TYPE__ACOUSTIC,
+    RESOURCE_TYPE__CAMERA,
+    RESOURCE_TYPE__ECM,
+    RESOURCE_TYPE__ENGINE,
+    RESOURCE_TYPE__ESM,
+    RESOURCE_TYPE__EXHAUST,
+    RESOURCE_TYPE__FUEL,
+    RESOURCE_TYPE__HUMS,
+    RESOURCE_TYPE__LRF,
+    RESOURCE_TYPE__LTD,
+    RESOURCE_TYPE__MET_SENSOR,
+    RESOURCE_TYPE__MOUNT,
+    RESOURCE_TYPE__NAV_UNIT,
+    RESOURCE_TYPE__NBC,
+    RESOURCE_TYPE__PLOT,
+    RESOURCE_TYPE__POWER,
+    RESOURCE_TYPE__RADAR,
+    RESOURCE_TYPE__RESOURCE_CONTROLLER,
+    RESOURCE_TYPE__RESOURCE_LIST,
+    RESOURCE_TYPE__ROUTE,
+    RESOURCE_TYPE__SLAVE_SETUP,
+    RESOURCE_TYPE__TRANSMISSION,
+    RESOURCE_TYPE__TURBO,
+    RESOURCE_TYPE__WEAPON,
+    RESOURCE_TYPE__CHARGER,
+    RESOURCE_TYPE__BATTERY,
+    RESOURCE_TYPE__GENERATOR,
+    RESOURCE_TYPE__FUEL_CELL,
+    RESOURCE_TYPE__INVERTER,
+    RESOURCE_TYPE__CONSUMER,
+    RESOURCE_TYPE__POWERNODE,
+    RESOURCE_TYPE__CHANNEL,
+    RESOURCE_TYPE__DETECTION,
+    RESOURCE_TYPE__TRACK,
+    RESOURCE_TYPE__DETECTION_CHARACTERISTICS,
+    RESOURCE_TYPE__TRACK_CHARACTERISTICS_RT
+  };
+
+
+
+  // This struct contains a resources identity and type.  The long 
+  // value used for the identity is to be unique for any given 
+  // resource type.  
+  // 
+  typedef struct tag_IdentifierType_T
+  {
+    long id;
+    ResourceType_E idType;
+  } IdentifierType_T;
+
+
+
+  // type = string<50>
+  // 
+  // A string with a maximum length of 50 characters.
+  // 
+  typedef string<50> String50_T;
+
+
+
+  // This describes an  event internal to a system or resource that 
+  // is made available for monitoring by a HUMS system. Typically a 
+  // system or resource will support a number of events that can be 
+  // configured for monitoring. 
+  // 
+  struct ResourceLogEventDescriptor_T
+  {
+    boolean eventSupported;
+    boolean counterSupported;
+    boolean resetSupported;
+    long resourceId;
+    ResourceType_E resourceIdType;
+    String50_T eventName;
+    String50_T description;
+  };
+#pragma keylist ResourceLogEventDescriptor_T resourceId resourceIdType
+
+
+
+  // An relative representation of time using the same format as 
+  // DDS::Duration_t
+  // 
+  typedef struct tag_VsiDuration_T
+  {
+    long seconds;
+    long nanoseconds;
+  } VsiDuration_T;
+
+
+
+  // The type of coordinates used to detail the position of  a 
+  // detection or a series of related detections (a track).
+  // 
+  enum  CoordinateType_E
+  {
+    COORDINATE_TYPE__CARTESIAN_2D,
+    COORDINATE_TYPE__CARTESIAN_3D,
+    COORDINATE_TYPE__POLAR_2D,
+    COORDINATE_TYPE__POLAR_3D
+  };
+
+
+
+  // This common data type specifies each point uniquely in a plane 
+  // by a pair of numerical coordinates - in this case Latitude &amp; 
+  // Longitude
+  // 
+  typedef struct tag_Coordinate2D_T
+  {
+    double latitude;
+    double longitude;
+  } Coordinate2D_T;
+
+
+
+  // Enumeration of the camera operational sub modes.
+  // 
+  enum  CameraOnSubModeType_E
+  {
+    CAMERA_ON_SUB_MODE_TYPE__DAYTIME,
+    CAMERA_ON_SUB_MODE_TYPE__LOW_LIGHT,
+    CAMERA_ON_SUB_MODE_TYPE__BLANK_VIDEO,
+    CAMERA_ON_SUB_MODE_TYPE__BUILT_IN_TEST
+  };
+
+
+
+  // Used to indicate the type of sensor that generated the detection.
+  // 
+  enum  DetectionSource_E
+  {
+    DETECTION_SOURCE__ACOUSTIC_DETECTION,
+    DETECTION_SOURCE__RADAR_DETECTION,
+    DETECTION_SOURCE__OPTICAL_DETECTION
+  };
+
+
+
+  // Describes the classification of the detection or track in terms 
+  // of platform type (tracked or wheeled vehicle etc.) or 
+  // gunshot,explosion etc.
+  // 
+  enum  ClassificationType_E
+  {
+    CLASSIFICATION_TYPE__UNSPECIFIED_CLASSIFICATION,
+    CLASSIFICATION_TYPE__GUNSHOT,
+    CLASSIFICATION_TYPE__GUNSHOT_BURST,
+    CLASSIFICATION_TYPE__EXPLOSION,
+    CLASSIFICATION_TYPE__HELICOPTER,
+    CLASSIFICATION_TYPE__TRACKED_VEHICLE,
+    CLASSIFICATION_TYPE__WHEELED_VEHICLE,
+    CLASSIFICATION_TYPE__PERSONNEL,
+    CLASSIFICATION_TYPE__JAMMER
+  };
+
+
+
+  // This common data type specifies Geographical position  by a set 
+  // of spherical polar coordinates - in this case angle,elevation 
+  // and range
+  // 
+  typedef struct tag_CoordinatePolar3D_T
+  {
+    double range;
+    double angle;
+    double elevation;
+  } CoordinatePolar3D_T;
+
+
+
+  // This common data type specifies Geographical position  by a set 
+  // of coordinates in 3 dimensions  - in this case 
+  // latitude,longitude and altitude.
+  // 
+  typedef struct tag_Coordinate3D_T
+  {
+    double latitude;
+    double longitude;
+    double altitude;
+  } Coordinate3D_T;
+
+
+
+  // This common data type specifies each point uniquely  by a pair 
+  // of polar coordinates - in this case range and angle.
+  // 
+  typedef struct tag_CoordinatePolar2D_T
+  {
+    double range;
+    double angle;
+  } CoordinatePolar2D_T;
+
+
+
+  // This describes the coordinate type used by a particular 
+  // detection or track to define various positions associated with 
+  // the detection or track.
+  // 
+  union Coordinate_T switch(CoordinateType_E)
+  {
+    case COORDINATE_TYPE__CARTESIAN_2D : Coordinate2D_T cartesian2D;
+    case COORDINATE_TYPE__CARTESIAN_3D : Coordinate3D_T cartesian3D;
+    case COORDINATE_TYPE__POLAR_2D : CoordinatePolar2D_T polar2D;
+    case COORDINATE_TYPE__POLAR_3D : CoordinatePolar3D_T polar3D;
+  };
+
+
+
+  // An absolute representation of time using the same datum as and a 
+  // similar format to DDS::Time_t.
+  // 
+  typedef struct tag_VsiTime_T
+  {
+    long long seconds;
+    unsigned long nanoseconds;
+  } VsiTime_T;
+
+
+
+  // This topic contains information on each separate detection 
+  // event, defining the position (polar or geodetic) of a single 
+  // event at a particular point in time. These could be reported and 
+  // collated irrespective of the sensors which carried out the 
+  // detections.
+  // 
+  struct Detection_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    long detectionId;
+    ResourceType_E detectionIdType;
+    ClassificationType_E classification;
+    DetectionSource_E sourceClass;
+    Coordinate_T detectedPosition;
+    CoordinateType_E positionType;
+    VsiTime_T timestamp;
+  };
+#pragma keylist Detection_T resourceId resourceIdType detectionId detectionIdType
+
+
+
+  // type = string<100>
+  // 
+  // A string with a maximum length of 100 characters.
+  // 
+  typedef string<100> String100_T;
+
+
+
+  // This is intended to indicate the validity of attributes of a 
+  // struct after it has been updated. This is effectively obsolete 
+  // and will be replaced by anothermethod of indicating valid 
+  // attributes. 
+  // 
+  typedef long BitFieldMask_T;
+
+
+
+  // Common data type containing components of linear velocity from a 
+  // common reference on the platform
+  // 
+  typedef struct tag_LinearVelocity_T
+  {
+    double x;
+    double y;
+    double z;
+  } LinearVelocity_T;
+
+
+
+  // This describes the method of classification, typically this is 
+  // either manual or automatic.
+  // 
+  enum  ClassificationMethodType_E
+  {
+    CLASSIFICATION_METHOD_TYPE__AUTOMATIC,
+    CLASSIFICATION_METHOD_TYPE__MANUAL
+  };
+
+
+
+  // The operational mode of a particular function. Units are 
+  // enumerated.
+  // 
+  enum  ModeType_E
+  {
+    MODE_TYPE__OFF,
+    MODE_TYPE__ON,
+    MODE_TYPE__STANDBY,
+    MODE_TYPE__MAINTENANCE,
+    MODE_TYPE__TRAINING
+  };
+
+
+
+  // Used to indicate the type of sensor that generated the detection.
+  // 
+  enum  TrackSource_E
+  {
+    TRACK_SOURCE__ACOUSTIC_TRACK,
+    TRACK_SOURCE__RADAR_TRACK,
+    TRACK_SOURCE__OPTICAL_TRACK
+  };
+
+
+
+  // Common data type to define the components of angular 
+  // acceleration in pitch, roll and yaw .
+  // 
+  // 
+  typedef struct tag_AngularAcceleration_T
+  {
+    double roll;
+    double pitch;
+    double yaw;
+  } AngularAcceleration_T;
+
+
+
+  // defines a box using 2 coordinates 
+  // 
+  typedef struct tag_BoxType_T
+  {
+    Coordinate3D_T coordOne;
+    Coordinate3D_T coordTwo;
+  } BoxType_T;
+
+
+
+  // type = string<20>
+  // 
+  // A string with a maximum length of 20 characters.
+  // 
+  typedef string<20> String20_T;
+
+
+
+  // An enumerated list of attributes of the track data struct to 
+  // define each attributes' validity each time the track data struct 
+  // is updated.
+  // 
+  enum  CoreTrackValidity_E
+  {
+    CORE_TRACK_VALIDITY__CLASSIFICATION,
+    CORE_TRACK_VALIDITY__CLASSIFICATION_METHOD,
+    CORE_TRACK_VALIDITY__SOURCE_CLASS,
+    CORE_TRACK_VALIDITY__CHARACTERISTICS,
+    CORE_TRACK_VALIDITY__TRACK_HEAD_DETECTION_ID,
+    CORE_TRACK_VALIDITY__GROUND_SPEED,
+    CORE_TRACK_VALIDITY__TRACK_HEAD_POSITION,
+    CORE_TRACK_VALIDITY__POSITION_TYPE,
+    CORE_TRACK_VALIDITY__CONFIDENCE,
+    CORE_TRACK_VALIDITY__NUMBER_OF_DETECTIONS,
+    CORE_TRACK_VALIDITY__TIME_STAMP_HEAD,
+    CORE_TRACK_VALIDITY__TRACK_STATUS
+  };
+
+
+  // an enumeration of the status of a track e.g predicted, updated, 
+  // initial, etc. 
+  // 
+  enum  TrackStatusType_E
+  {
+    TRACK_STATUS_TYPE__PREDICTED,
+    TRACK_STATUS_TYPE__INITIAL,
+    TRACK_STATUS_TYPE__UPDATED,
+    TRACK_STATUS_TYPE__INACTIVE,
+    TRACK_STATUS_TYPE__DELETED
+  };
+
+
+
+  // This defines the position (polar or geodetic) of an event over a 
+  // non-zero timeframe. It shall include information on bearing and 
+  // speed; although these may be zero if the event is stationary
+  // 
+  // 
+  // Due to the temporal nature of the data, it is necessary that 
+  // more than one detection is used in the construction of a track.
+  // 
+  struct Track_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    long trackId;
+    ResourceType_E trackIdType;
+    ClassificationType_E classification;
+    ClassificationMethodType_E classificationMethod;
+    TrackSource_E sourceClass;
+    IdentifierType_T trackHeadDetectionId;
+    double heading;
+    double groundSpeed;
+    Coordinate_T trackHeadPosition;
+    CoordinateType_E positionType;
+    long confidence;
+    double numberOfDetections;
+    TrackStatusType_E trackStatus;
+    sequence<CoreTrackValidity_E,20> coreValidity;
+    VsiTime_T timestampHead;
+  };
+#pragma keylist Track_T resourceId resourceIdType trackId trackIdType
+
+
+
+
+  // This describes a parameter internal to a system or resource that 
+  // are made available for monitoring by a HUMS system. Typically a 
+  // system or resource will support a number of parameter that can 
+  // be configured for monitoring.
+  // 
+  struct ResourceLogParameterDescriptor_T
+  {
+    boolean monitorSupported;
+    boolean thresholdSupported;
+    boolean conditionSupported;
+    double maximum;
+    double minimum;
+    double transmitPeriod;
+    long resourceId;
+    ResourceType_E resourceIdType;
+    String50_T parameterName;
+    String50_T description;
+  };
+#pragma keylist ResourceLogParameterDescriptor_T resourceId resourceIdType
+
+
+
+  // The identifier of the audio stream output from the sensor.
+  // 
+  typedef long AudioStreamId_T;
+
+
+
+  // 
+  // 
+  enum  CameraMaintenanceSubModeType_E
+  {
+    CAMERA_MAINTENANCE_SUB_MODE_TYPE__CALIBRATION_MODE,
+    CAMERA_MAINTENANCE_SUB_MODE_TYPE__BORESIGHTING_MODE,
+    CAMERA_MAINTENANCE_SUB_MODE_TYPE__SOFTWARE_UPDATE_MODE,
+    CAMERA_MAINTENANCE_SUB_MODE_TYPE__TEST_MODE
+  };
+
+
+
+  // Describe the software modules and their respective version 
+  // numbers. 
+  // 
+  typedef struct tag_SoftwareVersionDescriptor_T
+  {
+    String50_T softwareModuleName;
+    String50_T versionNumber;
+  } SoftwareVersionDescriptor_T;
+
+
+
+  // 
+  // 
+  enum  LtdSubModeType_E
+  {
+    LTD_SUB_MODE_TYPE__DESIGNATE,
+    LTD_SUB_MODE_TYPE__RANGEFINDING
+  };
+
+
+
+
+
+
+  // Union of optical sensor submodes.
+  // 
+  union OpticalSensorSubModeType_T switch(ModeType_E)
+  {
+    case MODE_TYPE__ON : CameraOnSubModeType_E cameraOnSubMode;
+    case MODE_TYPE__MAINTENANCE : CameraMaintenanceSubModeType_E cameraMaintenanceSubMode;
+  };
+
+
+
+  // 
+  // 
+  enum  AcousticSubModeType_E
+  {
+    ACOUSTIC_SUB_MODE_TYPE__SHOCK_WAVE,
+    ACOUSTIC_SUB_MODE_TYPE__MUZZLE_BLAST,
+    ACOUSTIC_SUB_MODE_TYPE__SHOCK_WAVE_AND_MUZZLE_BLAST
+  };
+
+
+
+  // 
+  // 
+  union SubModeReportType_T switch(ResourceType_E)
+  {
+    case RESOURCE_TYPE__ACOUSTIC : AcousticSubModeType_E acousticSubMode;
+    case RESOURCE_TYPE__LTD : LtdSubModeType_E ltdSubMode;
+    case RESOURCE_TYPE__CAMERA : OpticalSensorSubModeType_T opticalSensorSubMode;
+  };
+
+
+
+  // Describes the category of classification of the detection or 
+  // track in terms of hostile, friendly, neutral etc.
+  // 
+  enum  CategoryType_E
+  {
+    CATEGORY_TYPE__UNSPECIFIED_CATEGORY,
+    CATEGORY_TYPE__CLUTTER,
+    CATEGORY_TYPE__HOSTILE,
+    CATEGORY_TYPE__FRIENDLY,
+    CATEGORY_TYPE__NEUTRAL,
+    CATEGORY_TYPE__UNKNOWN,
+    CATEGORY_TYPE__REFERENCE
+  };
+
+
+
+  // The heartbeat topic is expected to be used by all applications 
+  // to periodically indicate liveness to the rest of the system.
+  // 
+  struct Heartbeat_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+  };
+#pragma keylist Heartbeat_T resourceId resourceIdType
+
+
+
+  // This describes the reason for a particular failure by a resource 
+  // to action a command .
+  // 
+  enum  CommandFailureType_E
+  {
+    COMMAND_FAILURE_TYPE__COMMAND_NOT_AVAILABLE,
+    COMMAND_FAILURE_TYPE__COMMAND_NOT_RECOGNISED,
+    COMMAND_FAILURE_TYPE__COMMAND_FAILED,
+    COMMAND_FAILURE_TYPE__RESOURCE_CONTROL_FAILURE
+  };
+
+
+
+  // Used to indicate whether each mode is supported by the resource.
+  // 
+  typedef struct tag_ModeCapability_T
+  {
+    boolean isOffCapable;
+    boolean isOnCapable;
+    boolean isStandbyCapable;
+    boolean isMaintenanceCapable;
+    boolean isTrainingCapable;
+  } ModeCapability_T;
+
+
+
+  // type = string<200>
+  // 
+  // A string with a maximum length of 200 characters.
+  // 
+  typedef string<200> String200_T;
+
+
+
+  // This data type is used as a topic published by all resources.  
+  // Until some new mechanism is adopted it will also be included in 
+  // each specialised capability.
+  // 
+  typedef struct tag_CommonCapability_T
+  {
+    String50_T manufacturer;
+    String50_T productName;
+    String200_T description;
+    String50_T serialNumber;
+    String50_T issue;
+    String50_T modStrike;
+    String20_T natoStockNumber;
+    sequence<SoftwareVersionDescriptor_T,20> softwareVersions;
+    ModeCapability_T supportedModes;
+    VsiTime_T timeOfDataGeneration;
+  } CommonCapability_T;
+
+
+
+  // A common capability type to be published by all resources.  
+  // 
+  struct Capability_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    CommonCapability_T data;
+  };
+#pragma keylist Capability_T resourceId resourceIdType
+
+
+
+
+
+
+  // Common structure to define the components of attitude in  roll, 
+  // pitch and yaw.
+  // 
+  typedef struct tag_RotationalOffset_T
+  {
+    double roll;
+    double pitch;
+    double yaw;
+  } RotationalOffset_T;
+
+
+
+
+
+  // This topic is sent by a resource if it receives a command that 
+  // cannot not be actioned.
+  // 
+  struct CommandNotActionedEvent_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    long requestorId;
+    ResourceType_E requestorIdType;
+    long referenceNum;
+    CommandFailureType_E failureQualifier;
+    String50_T failureQualifierString;
+  };
+#pragma keylist CommandNotActionedEvent_T resourceId resourceIdType requestorId requestorIdType referenceNum
+
+
+
+  // type = string<500>
+  // 
+  // A string with a maximum length of 500 characters.
+  // 
+  typedef string<500> String500_T;
+
+
+
+
+
+  // Common data type to define the components of angular velocity in 
+  // pitch, roll and yaw .
+  // 
+  typedef struct tag_AngularVelocity_T
+  {
+    double roll;
+    double pitch;
+    double yaw;
+  } AngularVelocity_T;
+
+
+
+  // 
+  // 
+  struct Fault_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    String50_T code;
+    String200_T description;
+    VsiTime_T timeFaultGenerated;
+  };
+#pragma keylist Fault_T resourceId resourceIdType
+
+
+
+  // A general sensor state topic which includes definitions of 
+  // operating mode and details of any BIT failings. Applies over the 
+  // following detector types: 
+  // 
+  // - unspecified type
+  // 
+  // - Optical
+  // 
+  // - Acoustic
+  // 
+  // - ESM
+  // 
+  // - Radar
+  // 
+  // - LTD
+  // 
+  // - LRF
+  // 
+  // - Processor
+  // 
+  struct SensorState_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    String500_T bitReport;
+    ModeType_E modeReport;
+    SubModeReportType_T subModeReport;
+    ResourceType_E resource;
+    BitFieldMask_T fieldValidity;
+    VsiTime_T timestamp;
+  };
+#pragma keylist SensorState_T resourceId resourceIdType
+
+
+
+  // 
+  // 
+  typedef struct tag_Heading_T
+  {
+    double circleAngle;
+  } Heading_T;
+
+
+
+
+
+  // Set the standard off, on, standby, maintenance and training mode 
+  // state of any resource.
+  // 
+  struct ModeCommand_T
+  {
+    long resourceId;
+    ResourceType_E resourceIdType;
+    long requestorId;
+    ResourceType_E requestorIdType;
+    long referenceNum;
+    ModeType_E setMode;
+    VsiTime_T timeOfDataGeneration;
+  };
+#pragma keylist ModeCommand_T resourceId resourceIdType requestorId requestorIdType
+
+
+
+ 
+
+  // This common data structure contains coordinates to define a 
+  // point on the surface of a sphere. 
+  // 
+  typedef struct tag_PointPolar3D_T
+  {
+    double radius;
+    double angle;
+    double elevation;
+  } PointPolar3D_T;
+
+
+
+  // Common data type containing the components of displacement x, y, 
+  // z from a common reference on the platform
+  // 
+  typedef struct tag_LinearOffset_T
+  {
+    double x;
+    double y;
+    double z;
+  } LinearOffset_T;
+
+
+
+  // Common data type containing the components of displacement x, y, 
+  // z from a common reference on the platform
+  // 
+  typedef struct tag_Displacement_T
+  {
+    double x;
+    double y;
+    double z;
+  } Displacement_T;
+
+
+
+
+
+  // Common structure to define the components of attitude in  roll, 
+  // pitch and yaw.
+  // 
+  typedef struct tag_Attitude_T
+  {
+    double roll;
+    double pitch;
+    double yaw;
+  } Attitude_T;
+
+
+
+  // Common data type containing components of linear accaleration 
+  // from a common reference on the platform
+  // 
+  // 
+  typedef struct tag_LinearAcceleration_T
+  {
+    double x;
+    double y;
+    double z;
+  } LinearAcceleration_T;
+
+
+
+
+
+
+  // This details all the sensors attached to the chassis and body 
+  // work such as
+  // 
+  // temperature (ambient, inertia, engine bay), acceleration 
+  // (vibration and shock), weight, seat occupancy, impact detection, 
+  // airbags, seat belt ( belt lock), rear mirror dimming, side 
+  // mirror control, doors and hatches, vehicle attitude and rates, 
+  // window control, windscreen wipers, speed limit governor, central 
+  // locking, anti theft, re solvers linear and rotational, DSC 
+  // includes acceleration, seat direction.
+  // 
+  module platform
+  {
+
+    // Generic data type for publishing weight. E.g. load weight, 
+    // axle weight, weight of the contents of a hopper. 
+    // 
+    struct PlatformWeight_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      double weight;
+    };
+#pragma keylist PlatformWeight_T resourceId resourceIdType
+
+
+
+    // Publish the open / close status of a door or hatch.
+    // 
+    // The door or hatch location is defined by the dest field.
+    // 
+    struct PlatformDoorState_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      boolean open;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist PlatformDoorState_T resourceId resourceIdType
+
+
+
+    // the position of the seat
+    // 
+    enum  PlatformSeatPosition_E
+    {
+      PLATFORM_SEAT_POSITION__OUT_OF_POSITION,
+      PLATFORM_SEAT_POSITION__FORWARD,
+      PLATFORM_SEAT_POSITION__BACKWARD
+    };
+
+
+
+    // The status of a seat.
+    // 
+    // covers, seatbelts, position, occupancy
+    // 
+    // 
+    struct PlatformSeatState_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      PlatformSeatPosition_E setPosition;
+      boolean ocupied;
+      boolean seatBeltLatched;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist PlatformSeatState_T resourceId resourceIdType
+
+
+
+    // A generic data type for publishing 3 dimensional acceleration.
+    // 
+    struct PlatformAcceleration_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      double accelerationX;
+      double accelerationY;
+      double accelerationZ;
+    };
+#pragma keylist PlatformAcceleration_T resourceId resourceIdType
+
+
+
+    // This message describes the vehicle movement. It is likely to 
+    // be compiled form a number of different sources.
+    // 
+    struct PlatformMovementState_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      long long odometerTotalDistance;
+      long long odometerTripDistance;
+      boolean speed;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist PlatformMovementState_T resourceId resourceIdType
+
+
+
+    // A generic data type for publishing temperature. e.g. ambient 
+    // temperature, engine bay temperature.
+    // 
+    // 
+    struct PlatformTemperatureState_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      double temperature;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist PlatformTemperatureState_T resourceId resourceIdType
+
+
+
+    // The capability provided by the resource.
+    // 
+    struct PlatformCapability_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      CommonCapability_T coreCapability;
+    };
+#pragma keylist PlatformCapability_T resourceId resourceIdType
+
+
+
+
+  };
+  // 
+  // 
+  module navigation
+  {
+
+    // Units are enumerated.
+    // 
+    enum  NavHeadingReferenceDatum_E
+    {
+      NAV_HEADING_REFERENCE_DATUM__MAGNETIC_FOR,
+      NAV_HEADING_REFERENCE_DATUM__TRUE_FOR,
+      NAV_HEADING_REFERENCE_DATUM__GRID_FOR
+    };
+
+
+
+    // 
+    // 
+    typedef struct tag_HeadingDataSet_T
+    {
+      NavHeadingReferenceDatum_E northReferenceDatum;
+      Heading_T navHeading;
+    } HeadingDataSet_T;
+
+
+
+    // Grid coordinate system associate with the datum. 
+    // 
+    enum  CoordinateSystemType_E
+    {
+      COORDINATE_SYSTEM_TYPE__BNG,
+      COORDINATE_SYSTEM_TYPE__MGRS,
+      COORDINATE_SYSTEM_TYPE__UPS,
+      COORDINATE_SYSTEM_TYPE__UTM
+    };
+
+
+
+    // 
+    // 
+    enum  CoordinateDatumType_E
+    {
+      COORDINATE_DATUM_TYPE__WGS_1984_GLOBAL_DEFINITION,
+      COORDINATE_DATUM_TYPE__ADINDAN_MEAN_FOR_ETHIOPIA_SUDAN,
+      COORDINATE_DATUM_TYPE__ADINDAN_BURKINA_FASO,
+      COORDINATE_DATUM_TYPE__ADINDAN_CAMEROON,
+      COORDINATE_DATUM_TYPE__ADINDAN_ETHIOPIA,
+      COORDINATE_DATUM_TYPE__ADINDAN_MALI,
+      COORDINATE_DATUM_TYPE__ADINDAN_SENEGAL,
+      COORDINATE_DATUM_TYPE__ADINDAN_SUDAN,
+      COORDINATE_DATUM_TYPE__AFGOOYE_SOMALIA,
+      COORDINATE_DATUM_TYPE__AIN_EL_ABD_1970_BAHRAIN,
+      COORDINATE_DATUM_TYPE__AIN_EL_ABD_1970_SAUDI_ARABIA,
+      COORDINATE_DATUM_TYPE__ANNA_1_ASTRO_1965_COCOS_ISLANDS,
+      COORDINATE_DATUM_TYPE__ANTIGUA_ISLAND_ASTRO_ANTIGUA_LEEWARD_ISLANDS,
+      COORDINATE_DATUM_TYPE__WGS_1972_GLOBAL_DEFINITION,
+      COORDINATE_DATUM_TYPE__ARC_1950_MEAN_FOR_BOTSWANA_LESOTHO_MALAWI,
+      COORDINATE_DATUM_TYPE__ARC_1950_SWAZILAND_ZAIRE_ZAMBIA_ZIMBABWE,
+      COORDINATE_DATUM_TYPE__ARC_1950_BOTSWANA,
+      COORDINATE_DATUM_TYPE__ARC_1950_BURUNDI,
+      COORDINATE_DATUM_TYPE__ARC_1950_LESOTHO,
+      COORDINATE_DATUM_TYPE__ARC_1950_MALAWI,
+      COORDINATE_DATUM_TYPE__ARC_1950_SWAZILAND,
+      COORDINATE_DATUM_TYPE__ARC_1950_ZAIRE,
+      COORDINATE_DATUM_TYPE__ARC_1950_ZAMBIA,
+      COORDINATE_DATUM_TYPE__ARC_1950_ZIMBABWE,
+      COORDINATE_DATUM_TYPE__ARC_1960_MEAN_FOR_KENYA_TANZANIA,
+      COORDINATE_DATUM_TYPE__ASCENSION_ISLAND_1958,
+      COORDINATE_DATUM_TYPE__ASTRO_BEACON_E_1945_IWO_JIMA,
+      COORDINATE_DATUM_TYPE__ASTRO_DOS__ST_HELENA_ISLAND,
+      COORDINATE_DATUM_TYPE__ASTRO_TERN_ISLAND_FRIG_1961,
+      COORDINATE_DATUM_TYPE__ASTRONOMICAL_STATION_1952_MARCUS_ISLAND,
+      COORDINATE_DATUM_TYPE__AUSTRALIAN_GEODETIC_1966_AUSTRALIA_AND_TASMANIA,
+      COORDINATE_DATUM_TYPE__AUSTRALIAN_GEODETIC_1984_AUSTRALIA_AND_TASMANIA,
+      COORDINATE_DATUM_TYPE__AYABELLE_LIGHTHOUSE_DJIBOUTI,
+      COORDINATE_DATUM_TYPE__BELLEVUE_IGN__EFATE_AND_ERROMANGO_ISLANDS,
+      COORDINATE_DATUM_TYPE__BERMUDA_1957,
+      COORDINATE_DATUM_TYPE__BISSAU_GUINEA_BISSAU,
+      COORDINATE_DATUM_TYPE__BOGOTA_OBSERVATORY_COLOMBIA,
+      COORDINATE_DATUM_TYPE__BUKIT_RIMPAH_INDONESIA_BANGKA_AND_BELITUNG_ISLANDS,
+      COORDINATE_DATUM_TYPE__CAMP_AREA_ASTRO_ANTARCTICA_MC_MURDO_CAMP_AREA,
+      COORDINATE_DATUM_TYPE__CAMPO_INCHAUSPE_ARGENTINA,
+      COORDINATE_DATUM_TYPE__CANTON_ASTRO_1966_PHOENIX_ISLANDS,
+      COORDINATE_DATUM_TYPE__CAPE_SOUTH_AFRICA,
+      COORDINATE_DATUM_TYPE__CAPE_CANAVERAL_BAHAMAS_FLORIDA,
+      COORDINATE_DATUM_TYPE__CARTHAGE_TUNISIA,
+      COORDINATE_DATUM_TYPE__CHATHAM_ISLAND_ASTRO_1971_NEW_ZEALAND_CHATHAM_ISLAND,
+      COORDINATE_DATUM_TYPE__CHUA_ASTRO_PARAGUAY,
+      COORDINATE_DATUM_TYPE__CORREGO_ALEGRE_BRAZIL,
+      COORDINATE_DATUM_TYPE__DABOLA_GUINEA,
+      COORDINATE_DATUM_TYPE__DJAKARTA_BATAVIA__INDONESIA_SUMATRA,
+      COORDINATE_DATUM_TYPE__DOS_1968_NEW_GEORGIA_ISLANDS_GIZO_ISLAND,
+      COORDINATE_DATUM_TYPE__EASTER_ISLAND_1967,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_MEAN_FOR_AUSTRIA_BELGIUM_DENMARK_FINLAND,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_FRANCE_W_GERMANY_GIBRALTAR_GREECE,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_ITALY_LUXEMBOURG_NETHERLANDS_NORWAY,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_PORTUGAL_SPAIN_SWEDEN_SWITZERLAND,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_MEAN_FOR_AUSTRIA_DENMARK_FRANCE,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_W_GERMANY_NETHERLANDS_SWITZERLAND,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_MEAN_FOR_IRAQ_ISRAEL_JORDAN_LEBANON,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_KUWAIT_SAUDI_ARABIA_SYRIA,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_CYPRUS,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_EGYPT,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_ENGLAND_CHANNEL_ISLANDS_IRELAND,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_SCOTLAND_SHETLAND_ISLANDS,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_FINLAND_NORWAY,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_GREECE,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_IRAN,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_ITALY_SARDINIA,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_ITALY_SICILY,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1950_MALTA,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1979_MEAN_FOR_AUSTRIA_FINLAND_NETHERLANDS,
+      COORDINATE_DATUM_TYPE__EUROPEAN_1979_NORWAY_SPAIN_SWEDEN_SWITZERLAND,
+      COORDINATE_DATUM_TYPE__FORT_THOMAS_1955_NEVIS_ST_KITTS_LEEWARD_ISLANDS,
+      COORDINATE_DATUM_TYPE__GAN_1970_REPUBLIC_OF_MALDIVES,
+      COORDINATE_DATUM_TYPE__GEODETIC_DATUM_1949_NEW_ZEALAND,
+      COORDINATE_DATUM_TYPE__GRACIOSA_BASE_SW_1948_AZORES_FAIAL_GRACIOSA_PICO,
+      COORDINATE_DATUM_TYPE__GRACIOSA_BASE_SW_1948_SAO_JORGE_TERCEIRA,
+      COORDINATE_DATUM_TYPE__GUAM_1963,
+      COORDINATE_DATUM_TYPE__GUNUNG_SEGARA_INDONESIA_KALIMANTAN,
+      COORDINATE_DATUM_TYPE__GUX_1_ASTRO_GUADALCANAL_ISLAND,
+      COORDINATE_DATUM_TYPE__HERAT_NORTH_AFGHANISTAN,
+      COORDINATE_DATUM_TYPE__HJORSEY_1955_ICELAND,
+      COORDINATE_DATUM_TYPE__HONG_KONG_1963,
+      COORDINATE_DATUM_TYPE__HU_TZU_SHAN_TAIWAN,
+      COORDINATE_DATUM_TYPE__INDIAN_BANGLADESH,
+      COORDINATE_DATUM_TYPE__INDIAN_INDIA_NEPAL,
+      COORDINATE_DATUM_TYPE__INDIAN_1954_THAILAND_VIETNAM,
+      COORDINATE_DATUM_TYPE__INDIAN_1975_THAILAND,
+      COORDINATE_DATUM_TYPE__IRELAND_1965,
+      COORDINATE_DATUM_TYPE__ISTS_061_ASTRO_1968_SOUTH_GEORGIA_ISLANDS,
+      COORDINATE_DATUM_TYPE__ISTS_073_ASTRO_1969_DIEGO_GARCIA,
+      COORDINATE_DATUM_TYPE__JOHNSTON_ISLAND_1961,
+      COORDINATE_DATUM_TYPE__KANDAWALA_SRI_LANKA,
+      COORDINATE_DATUM_TYPE__KERGUELEN_ISLAND_1949,
+      COORDINATE_DATUM_TYPE__KERTAU_1948_WEST_MALAYSIA_AND_SINGAPORE,
+      COORDINATE_DATUM_TYPE__KUSAIE_ASTRO_1951_CAROLINE_ISLANDS,
+      COORDINATE_DATUM_TYPE__L_C_5_ASTRO_1961_CAYMAN_BRAC_ISLAND,
+      COORDINATE_DATUM_TYPE__LEIGON_GHANA,
+      COORDINATE_DATUM_TYPE__LIBERIA_1964,
+      COORDINATE_DATUM_TYPE__LUZON_PHILIPPINES_EXCLUDING_MINDANAO,
+      COORDINATE_DATUM_TYPE__LUZON_PHILIPPINES_MINDANAO,
+      COORDINATE_DATUM_TYPE__MAHE_1971_MAHE_ISLAND,
+      COORDINATE_DATUM_TYPE__MASSAWA_ETHIOPIA_ERITREA,
+      COORDINATE_DATUM_TYPE__MERCHICH_MOROCCO,
+      COORDINATE_DATUM_TYPE__MIDWAY_ASTRO_1961_MIDWAY_ISLANDS,
+      COORDINATE_DATUM_TYPE__MINNA_CAMEROON,
+      COORDINATE_DATUM_TYPE__MINNA_NIGERIA,
+      COORDINATE_DATUM_TYPE__MONTSERRAT_ISLAND_ASTRO_1958_MONTSERRAT_LEEWARD_ISLANDS,
+      COORDINATE_DATUM_TYPE__M_PORALOKO_GABON,
+      COORDINATE_DATUM_TYPE__NAHRWAN_OMAN_MASIRAH_ISLAND,
+      COORDINATE_DATUM_TYPE__NAHRWAN_SAUDI_ARABIA,
+      COORDINATE_DATUM_TYPE__NAHRWAN_UNITED_ARAB_EMIRATES,
+      COORDINATE_DATUM_TYPE__NAPARIMA_BWI_TRINIDAD_AND_TOBAGO,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_MEAN_FOR_ANTIGUA_BARBADOS_BARBUDA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CAICOS_ISLANDS_CUBA_DOMINICAN_REPUBLIC,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_GRAND_CAYMAN_JAMAICA_TURKS_ISLANDS,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_MEAN_FOR_BELIZE_COSTA_RICA_EL_SALVADOR,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_GUATEMALA_HONDURAS_NICARAGUA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_MEAN_FOR_CANADA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_MEAN_FOR_CONUS,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_MEAN_FOR_CONUS_EAST_OF_MISSISSIPPI_RIVER,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_INCLUDING_LOUISIANA_MISSOURI_MINNESOTA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_MEAN_FOR_CONUS_WEST_OF_MISSISSIPPI_RIVER,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_ALASKA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_BAHAMAS_EXCEPT_SAN_SALVADOR_ISLAND,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_BAHAMAS_SAN_SALVADOR_ISLAND,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CANADA_ALBERTA_BRITISH_COLUMBIA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CANADA_MANITOBA_ONTARIO,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CANADA_NEW_BRUNSWICK_NEWFOUNDLAND,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_NOVA_SCOTIA_QUEBEC,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CANADA_NORTHWEST_TERRITORIES_SASKATCHEWAN,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CANADA_YUKON,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CANAL_ZONE,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_CUBA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_GREENLAND_HAYES_PENINSULA,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1927_MEXICO,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1983_ALASKA_CANADA_CONUS,
+      COORDINATE_DATUM_TYPE__NORTH_AMERICAN_1983_CENTRAL_AMERICA_MEXICO,
+      COORDINATE_DATUM_TYPE__OBSERVATORY_METEREO_1939_AZORES_CORVO_AND_FLORES_ISLANDS,
+      COORDINATE_DATUM_TYPE__OLD_EGYPTIAN_1907_EGYPT,
+      COORDINATE_DATUM_TYPE__OLD_HAWAIIAN_MEAN_FOR_HAWAII_KAUAI_MAUI_OAHU,
+      COORDINATE_DATUM_TYPE__OLD_HAWAIIAN_HAWAII,
+      COORDINATE_DATUM_TYPE__OLD_HAWAIIAN_KAUAI,
+      COORDINATE_DATUM_TYPE__OLD_HAWAIIAN_MAUI,
+      COORDINATE_DATUM_TYPE__OLD_HAWAIIAN_OAHU,
+      COORDINATE_DATUM_TYPE__OMAN,
+      COORDINATE_DATUM_TYPE__ORD_SURVEY_G_BRITAIN_1936_ENGLAND_ISLE_OF_MAN_SCOTLAND,
+      COORDINATE_DATUM_TYPE__ORD_SURVEY_G_BRITAIN_1936_SHETLAND_ISLANDS_WALES,
+      COORDINATE_DATUM_TYPE__ORD_SURVEY_G_BRITAIN_1936_ENGLAND,
+      COORDINATE_DATUM_TYPE__ORD_SURVEY_G_BRITAIN_1936_ENGLAND_ISLE_OF_MAN_WALES,
+      COORDINATE_DATUM_TYPE__ORD_SURVEY_G_BRITAIN_1936_SCOTLAND_SHETLAND_ISLANDS,
+      COORDINATE_DATUM_TYPE__ORD_SURVEY_G_BRITAIN_1936_WALES,
+      COORDINATE_DATUM_TYPE__PICO_DE_LAS_NIEVES_CANARY_ISLANDS,
+      COORDINATE_DATUM_TYPE__PITCAIRN_ASTRO_1967_PITCAIRN_ISLAND,
+      COORDINATE_DATUM_TYPE__POINT_58_MEAN_FOR_BURKINA_FASO_AND_NIGER,
+      COORDINATE_DATUM_TYPE__POINTE_NOIRE_1948_CONGO,
+      COORDINATE_DATUM_TYPE__PORTO_SANTO_1936_MADEIRA_ISLANDS,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956M_MEAN_FOR_BOLIVIA_CHILE_COLOMBIA,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_ECUADOR_GUYANA_PERU_VENEZUELA,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_BOLIVIA,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_CHILE_NORTHERN_NEAR_19_S,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_CHILE_SOUTHERN_NEAR_43_S,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_COLOMBIA,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_ECUADOR,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_GUYANA,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_PERU,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_AMERICAN_1956_VENEZUELA,
+      COORDINATE_DATUM_TYPE__PROVISIONAL_S_CHILEAN_1963_CHILE_SOUTH_NEAR_53_S__HITO_XVIII,
+      COORDINATE_DATUM_TYPE__PUERTO_RICO_VIRGIN_ISLANDS,
+      COORDINATE_DATUM_TYPE__QATAR_NATIONAL,
+      COORDINATE_DATUM_TYPE__QORNOQ_GREENLAND_SOUTH,
+      COORDINATE_DATUM_TYPE__REUNION_MASCARENE_ISLANDS,
+      COORDINATE_DATUM_TYPE__ROME_1940_ITALY_SARDINIA,
+      COORDINATE_DATUM_TYPE__SANTO_DOS_1965_ESPIRITO_SANTO_ISLAND,
+      COORDINATE_DATUM_TYPE__SAO_BRAZ_AZORES_SAO_MIGUEL_SANTA_MARIA_ISLANDS,
+      COORDINATE_DATUM_TYPE__SAPPER_HILL_1943_EAST_FALKLAND_ISLAND,
+      COORDINATE_DATUM_TYPE__SCHWARZECK_NAMIBIA,
+      COORDINATE_DATUM_TYPE__SELVAGEM_GRANDE_SALVAGE_ISLANDS,
+      COORDINATE_DATUM_TYPE__SGS_85_SOVIET_GEODETIC_SYSTEM_1985,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_MEAN_FOR_ARGENTINA_BOLIVIA_BRAZIL_CHILE,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_COLOMBIA_ECUADOR_GUYANA_PARAGUAY,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_PERU_TRINIDAD_AND_TOBAGO_VENEZUELA,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969__ARGENTINA,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_BOLIVIA,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_BRAZIL,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_CHILE,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_COLOMBIA,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_ECUADOR,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_ECUADOR_BALTRA_GALAPAGOS,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_GUYANA,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_PARAGUAY,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_PERU,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_TRINIDAD_AND_TOBAGO,
+      COORDINATE_DATUM_TYPE__SOUTH_AMERICAN_1969_VENEZUELA,
+      COORDINATE_DATUM_TYPE__SOUTH_ASIA_SINGAPORE,
+      COORDINATE_DATUM_TYPE__TANANARIVE_OBSERVATORY_1925_MADAGASCAR,
+      COORDINATE_DATUM_TYPE__TIMBALAI_1948_BRUNEI_EAST_MALAYSIA_SABAH_SARAWAK,
+      COORDINATE_DATUM_TYPE__TOKYO_MEAN_FOR_JAPAN_KOREA_OKINAWA,
+      COORDINATE_DATUM_TYPE__TOKYO_JAPAN,
+      COORDINATE_DATUM_TYPE__TOKYO_KOREA,
+      COORDINATE_DATUM_TYPE__TOKYO_OKINAWA,
+      COORDINATE_DATUM_TYPE__TRISTAN_ASTRO_1968_TRISTAN_DA_CUNHA,
+      COORDINATE_DATUM_TYPE__VITI_LEVU_1916_FIJI_VITI_LEVU_ISLAND,
+      COORDINATE_DATUM_TYPE__WAKE_ENIWETOK_1960_MARSHALL_ISLANDS,
+      COORDINATE_DATUM_TYPE__WAKE_ISLAND_ASTRO_1952_WAKE_ATOLL,
+      COORDINATE_DATUM_TYPE__WGS_1972_20_0_0_0__GLOBAL_DEFINITION,
+      COORDINATE_DATUM_TYPE__YACARE_URUGUAY,
+      COORDINATE_DATUM_TYPE__ZANDERIJ_SURINAME
+    };
+
+
+
+    // Structure defining coordinate system. 
+    // 
+    typedef struct tag_NavCoordinateSystem_T
+    {
+      CoordinateDatumType_E coordinateDatum;
+      CoordinateSystemType_E coordinateSystem;
+    } NavCoordinateSystem_T;
+
+
+
+    // This topic allows selection of one coordinate system from a 
+    // list that is supported by the navigation system. The user 
+    // should ensure only valid combinations of reference coordinate 
+    // system and local datum are selected. Examples:
+    // 
+    // reference Coordinate System		Datum
+    // 
+    // 	UTM				WGS84
+    // 
+    // 	UTM				Herat North, Afghanistan
+    // 
+    // 	BNG				OSGB36 
+    // 
+    struct NavReferenceSystemCommand_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      long requestorId;
+      ResourceType_E requestorIdType;
+      long referenceNum;
+      NavCoordinateSystem_T coordinates;
+      HeadingDataSet_T northReference;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavReferenceSystemCommand_T navElementId navElementIdType requestorId requestorIdType
+
+
+
+    // Defines the action taken by the resource on a command 
+    // 
+    enum  CommandOperationStateType_E
+    {
+      COMMAND_OPERATION_STATE_TYPE__COMMAND_UNSUPPORTED,
+      COMMAND_OPERATION_STATE_TYPE__ENTERED_DATA_ERROR,
+      COMMAND_OPERATION_STATE_TYPE__COMMAND_ACCEPTED
+    };
+
+
+
+    // Installation calibration parameters specifies the placement 
+    // and attitude displacement of the navigation sensor relative to 
+    // the vehicle zero datum. The gyro calibration variables 
+    // correspond to navigation system's internal calibration of gyro 
+    // drift, etc.
+    // 
+    enum  NavSensorCalibrationVariables_E
+    {
+      NAV_SENSOR_CALIBRATION_VARIABLES__X_GYRO_BIAS,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Y_GYRO_BIAS,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Z_GYRO_BIAS,
+      NAV_SENSOR_CALIBRATION_VARIABLES__X_GYRO_SCALE_FACTOR_ERROR,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Y_GYRO_SCALE_FACTOR_ERROR,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Z_GYRO_SCALE_FACTOR_ERROR,
+      NAV_SENSOR_CALIBRATION_VARIABLES__X_ROTATION_REF_STRAIGHT_AHEAD,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Y_LOOK_UP_REF_LEVEL_ALONG_VEHICLE,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Z_TILT_REF_PLANE_ACROSS_VEHICLE,
+      NAV_SENSOR_CALIBRATION_VARIABLES__X_OFFSET_FROM_DATUM,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Y_OFFSET_FROM_DATUM,
+      NAV_SENSOR_CALIBRATION_VARIABLES__Z_OFFSET_FROM_DATUM
+    };
+
+
+
+    // 
+    // 
+    typedef struct tag_NavSensorCalibrationValues_T
+    {
+      double variableValue;
+      NavSensorCalibrationVariables_E variableType;
+    } NavSensorCalibrationValues_T;
+
+
+
+    // Calibration attribute definition with a dependency on the 
+    // navigation resource, in that not all navigation resources will 
+    // support all of the attributes. To support this dependency, a 
+    // list structure is introduced that will hold the attributes 
+    // supported.
+    // 
+    struct NavSensorCalibrationState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      double xGyroBias;
+      double yGyroBias;
+      double zGyroBias;
+      double xGyroScaleFactorError;
+      double yGyroScalrFactor;
+      double zGyroScaleFactor;
+      double xRotateRefStraightAhead;
+      double yLookUpRefLevelAlongVehicle;
+      double zTiltRefPlaneAcrossVehicle;
+      double xOffsetFromDatum;
+      double yOffsetFromDatum;
+      double zOffsetFromDatum;
+      sequence<NavSensorCalibrationValues_T,20> recentlyChanged;
+      CommandOperationStateType_E commandState;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavSensorCalibrationState_T navElementId navElementIdType
+
+
+
+    // 
+    // 
+    enum  NavSensorCalibrationType_E
+    {
+      NAV_SENSOR_CALIBRATION_TYPE__NO_CALIBRATION_SUPPORT,
+      NAV_SENSOR_CALIBRATION_TYPE__MECHANICAL_CALIBRATION_ONLY,
+      NAV_SENSOR_CALIBRATION_TYPE__GYRO_CALIBRATION_ONLY,
+      NAV_SENSOR_CALIBRATION_TYPE__MECHANICAL_AND_GYRO_CALIBRATION
+    };
+
+
+
+    // Status for a keyed gyro based navigation system. The GPS keyed 
+    // status is additional to GPSstatus defined in 
+    // "navGpsStatusType". It provides status report on requiring key 
+    // and user inputs.
+    // 
+    enum  NavGpsKeyedStatusType_E
+    {
+      NAV_GPS_KEYED_STATUS_TYPE__KEY_REQUIRED,
+      NAV_GPS_KEYED_STATUS_TYPE__INVALID_KEY_RECEIVED,
+      NAV_GPS_KEYED_STATUS_TYPE__KEY_ACCEPTED,
+      NAV_GPS_KEYED_STATUS_TYPE__NO_ACTION_REQUIRED
+    };
+
+
+
+    // Different grades of navigation system provide different forms 
+    // of error budgets. 
+    // 
+    enum  NavErrorType_E
+    {
+      NAV_ERROR_TYPE__GDOP,
+      NAV_ERROR_TYPE__FOM,
+      NAV_ERROR_TYPE__CEP,
+      NAV_ERROR_TYPE__ERROR_RATING,
+      NAV_ERROR_TYPE__NONE_AVAILABLE
+    };
+
+
+
+
+
+
+    // Installation calibration parameters specifies the placement 
+    // and attitude displacement of the navigation sensor relative to 
+    // the vehicle zero datum.
+    // 
+    enum  NavSensorInstallationCalibrationVariables_E
+    {
+      NAV_SENSOR_INSTALLATION_CALIBRATION_VARIABLES__X_ROTATION_REF_STRAIGHT_AHEAD,
+      NAV_SENSOR_INSTALLATION_CALIBRATION_VARIABLES__Y_LOOK_UP_REF_LEVEL_ALONG_VEHICLE,
+      NAV_SENSOR_INSTALLATION_CALIBRATION_VARIABLES__Z_TILT_REF_PLANE_ACROSS_VEHICLE,
+      NAV_SENSOR_INSTALLATION_CALIBRATION_VARIABLES__X_OFFSET_FROM_DATUM,
+      NAV_SENSOR_INSTALLATION_CALIBRATION_VARIABLES__Y_OFFSET_FROM_DATUM,
+      NAV_SENSOR_INSTALLATION_CALIBRATION_VARIABLES__Z_OFFSET_FROM_DATUM
+    };
+
+
+
+    // 
+    // 
+    enum  LinearExcursionLimitName_E
+    {
+      LINEAR_EXCURSION_LIMIT_NAME__ALONG_XAXIS,
+      LINEAR_EXCURSION_LIMIT_NAME__ALONG_YAXIS,
+      LINEAR_EXCURSION_LIMIT_NAME__ALONG_ZAXIS
+    };
+
+
+
+    // A acceleration event will be generated when the linear 
+    // acceleration exceeds the set acceleration threshold.
+    // 
+    // 
+    struct NavLinearAccelerationEvent_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      boolean alongXAxis;
+      boolean alongYAxis;
+      boolean alongZAxis;
+      sequence<LinearExcursionLimitName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavLinearAccelerationEvent_T navElementId navElementIdType
+
+    // Specification of what excursion data is provided by the 
+    // navigation system.
+    // 
+    enum  NavExcursionParameterName_E
+    {
+      NAV_EXCURSION_PARAMETER_NAME__X_LINEAR_VELOCITY,
+      NAV_EXCURSION_PARAMETER_NAME__Y_LINEAR_VELOCITY,
+      NAV_EXCURSION_PARAMETER_NAME__Z_LINEAR_VELOCITY,
+      NAV_EXCURSION_PARAMETER_NAME__X_LINEAR_ACCELERATION,
+      NAV_EXCURSION_PARAMETER_NAME__Y_LINEAR_ACCELERATION,
+      NAV_EXCURSION_PARAMETER_NAME__Z_LINEAR_ACCELERATION,
+      NAV_EXCURSION_PARAMETER_NAME__PITCH_RATE,
+      NAV_EXCURSION_PARAMETER_NAME__YAW_RATE,
+      NAV_EXCURSION_PARAMETER_NAME__ROLL_RATE,
+      NAV_EXCURSION_PARAMETER_NAME__PITCH_ACCELERATION,
+      NAV_EXCURSION_PARAMETER_NAME__YAW_ACCELERATION,
+      NAV_EXCURSION_PARAMETER_NAME__ROLL_ACCELERATION
+    };
+
+    // Discriminator changed to NavExcursionParameterName_E
+    // 
+    union NavExcursionParameterTypes_T switch(NavExcursionParameterName_E)
+    {
+      case NAV_EXCURSION_PARAMETER_NAME__X_LINEAR_VELOCITY : double xLinearVelocity;
+      case NAV_EXCURSION_PARAMETER_NAME__Y_LINEAR_VELOCITY : double yLinearVelocity;
+      case NAV_EXCURSION_PARAMETER_NAME__Z_LINEAR_VELOCITY : double zLinearVelocity;
+      case NAV_EXCURSION_PARAMETER_NAME__X_LINEAR_ACCELERATION : boolean xLinearAcceleration;
+      case NAV_EXCURSION_PARAMETER_NAME__Y_LINEAR_ACCELERATION : boolean yLinearAcceleration;
+      case NAV_EXCURSION_PARAMETER_NAME__Z_LINEAR_ACCELERATION : boolean zLinearAcceleration;
+      case NAV_EXCURSION_PARAMETER_NAME__PITCH_RATE : double pitchRate;
+      case NAV_EXCURSION_PARAMETER_NAME__YAW_RATE : double yawRate;
+      case NAV_EXCURSION_PARAMETER_NAME__ROLL_RATE : double rollRate;
+      case NAV_EXCURSION_PARAMETER_NAME__PITCH_ACCELERATION : boolean pitchAcceleration;
+      case NAV_EXCURSION_PARAMETER_NAME__YAW_ACCELERATION : boolean yawAcceleration;
+      case NAV_EXCURSION_PARAMETER_NAME__ROLL_ACCELERATION : boolean rollAcceleration;
+    };
+
+
+    // 
+    // 
+    typedef struct tag_NavExcursionParameterData_T
+    {
+      NavExcursionParameterName_E name;
+      NavExcursionParameterTypes_T data;
+    } NavExcursionParameterData_T;
+
+
+
+    // One or related commands to be carried out by a resource as one 
+    // action.
+    // 
+    // 
+    // An linear velocity threshold limit about a given axis that 
+    // generates an event (m/s). Can define threshold for all three 
+    // x, y, and z. direction if supported.
+    // 
+    // 
+    // An linear acceleration threshold limit about a given axis that 
+    // generates an event (m/s/s). Can define threshold for all three 
+    // x, y, and z. direction if supported.
+    // 
+    // 
+    // An angular velocity threshold limit about a given axis that 
+    // generates an event (rad/s). Can define the threshold for all 
+    // three pitch, roll, and yaw directions if supported by device.
+    // 
+    // 
+    // An angular acceleration threshold limit about a given axis 
+    // that generates an event (rad/s/s). Can define the threshold 
+    // for all three axes, pitch, roll and yaw, if supported by 
+    // device.
+    // 
+    struct NavExcursionCommand_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      long requestorId;
+      ResourceType_E  requestorIdType;
+      long referenceNum;
+      sequence<NavExcursionParameterData_T,20> excursionThresholdLimitData;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavExcursionCommand_T navElementId navElementIdType requestorId requestorIdType
+
+
+    // Defines type of navigation resource.
+    // 
+    enum  NavResourceType_E
+    {
+      NAV_RESOURCE_TYPE__COMPASS_ONLY,
+      NAV_RESOURCE_TYPE__GPS_ONLY,
+      NAV_RESOURCE_TYPE__KEY_GPS_ONLY,
+      NAV_RESOURCE_TYPE__INS_ONLY,
+      NAV_RESOURCE_TYPE__GPS_AIDED_INS,
+      NAV_RESOURCE_TYPE__KEY_GPS_AIDED_INS
+    };
+
+
+
+    // 
+    // 
+    typedef struct tag_NavErrorDataType_T
+    {
+      double Error;
+      NavErrorType_E ErrorType;
+    } NavErrorDataType_T;
+
+
+
+    // 
+    // 
+    enum  NavVelocityHeadingParameterName_E
+    {
+      NAV_VELOCITY_HEADING_PARAMETER_NAME__HEADING,
+      NAV_VELOCITY_HEADING_PARAMETER_NAME__X_VELOCITY,
+      NAV_VELOCITY_HEADING_PARAMETER_NAME__Y_VELOCITY,
+      NAV_VELOCITY_HEADING_PARAMETER_NAME__Z_VELOCITY
+    };
+
+
+
+    // Installation calibration parameters specifies the placement 
+    // and attitude displacement of the navigation sensor relative to 
+    // the vehicle zero datum. The gyro calibration variables 
+    // correspond to navigation system's internal calibration of gyro 
+    // drift, etc.
+    // 
+
+    // 
+    // 
+    enum  LinearExcursionLimitType_E
+    {
+      LINEAR_EXCURSION_LIMIT_TYPE__ALONG_XAXIS,
+      LINEAR_EXCURSION_LIMIT_TYPE__ALONG_YAXIS,
+      LINEAR_EXCURSION_LIMIT_TYPE__ALONG_ZAXES,
+      LINEAR_EXCURSION_LIMIT_TYPE__ALONG_X_AND_YAXES,
+      LINEAR_EXCURSION_LIMIT_TYPE__ALONG_XAND_ZAXIS,
+      LINEAR_EXCURSION_LIMIT_TYPE__ALONG_YAND_ZAXES,
+      LINEAR_EXCURSION_LIMIT_TYPE__ALONG_ALL_AXES,
+      LINEAR_EXCURSION_LIMIT_TYPE__NONE_AVAILABLE
+    };
+
+
+
+    // Specification of what positional data is provided by the 
+    // navigation system.
+    // 
+    enum  NavPositionParameterName_E
+    {
+      NAV_POSITION_PARAMETER_NAME__LONGITUDE,
+      NAV_POSITION_PARAMETER_NAME__LATITUDE,
+      NAV_POSITION_PARAMETER_NAME__HEIGHT,
+      NAV_POSITION_PARAMETER_NAME__POSITION_ERROR,
+      NAV_POSITION_PARAMETER_NAME__HEIGHT_ERROR,
+      NAV_POSITION_PARAMETER_NAME__UTC_TIME_OF_DAY,
+      NAV_POSITION_PARAMETER_NAME__DATE,
+      NAV_POSITION_PARAMETER_NAME__DISTANCE_TRAVELLED
+    };
+
+
+
+    // 
+    // 
+    union NavPositionParameterTypes_T switch(NavPositionParameterName_E)
+    {
+      case NAV_POSITION_PARAMETER_NAME__LONGITUDE : double longitude;
+      case NAV_POSITION_PARAMETER_NAME__LATITUDE : double latitude;
+      case NAV_POSITION_PARAMETER_NAME__HEIGHT : double height;
+      case NAV_POSITION_PARAMETER_NAME__UTC_TIME_OF_DAY : double utcTimeOfDay;
+      case NAV_POSITION_PARAMETER_NAME__DISTANCE_TRAVELLED : double distanceTravelled;
+      case NAV_POSITION_PARAMETER_NAME__POSITION_ERROR : NavErrorDataType_T positionError;
+      case NAV_POSITION_PARAMETER_NAME__HEIGHT_ERROR : NavErrorDataType_T heightError;
+      case NAV_POSITION_PARAMETER_NAME__DATE : String20_T date;
+    };
+
+
+
+    // 
+    // 
+    typedef struct tag_NavPositionParameterData_T
+    {
+      NavPositionParameterName_E name;
+      NavPositionParameterTypes_T data;
+    } NavPositionParameterData_T;
+
+
+
+    // One or related commands to be carried out by a resource as one 
+    // action.
+    // 
+    // 
+    // This topic will be used to calibrate the navigation system via 
+    // position (lat/long) and/or a height fix together with 
+    // associated estimated errors. Similarly calibration of other 
+    // parameters can be accommodated if supported by the navigation 
+    // resource.
+    // 
+    struct NavPositionCommand_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      long requestorId;
+      ResourceType_E requestorIdType;
+      long referenceNum;
+      sequence<NavPositionParameterData_T,10> positionalData;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavPositionCommand_T navElementId navElementIdType requestorId requestorIdType
+
+
+
+    // 
+    // 
+    enum  NavAttitudeType_E
+    {
+      NAV_ATTITUDE_TYPE__PITCH_ONLY,
+      NAV_ATTITUDE_TYPE__ROLL_ONLY,
+      NAV_ATTITUDE_TYPE__YAW_ONLY,
+      NAV_ATTITUDE_TYPE__PITCH_YAW_ONLY,
+      NAV_ATTITUDE_TYPE__PITCH_ROLL_ONLY,
+      NAV_ATTITUDE_TYPE__YAW_ROLL_ONLY,
+      NAV_ATTITUDE_TYPE__PITCH_YAW_ROLL,
+      NAV_ATTITUDE_TYPE__NONE_AVAILABLE
+    };
+
+
+
+    // The states of attributes positionRequest, positionFixReceived 
+    // and positionFixAccepted will be as follows:
+    // 
+    // 
+    // positionRequest		positionFixReceived	positionFixAccepted
+    // 
+    // 
+    // 	Yes			No			No
+    // 
+    // 	Yes			Yes			No
+    // 
+    // 	No			Yes			Yes
+    // 
+    // 
+    // The position fix data is published by topic 
+    // "navPositionCommand". When the positionRequest changes state 
+    // from No to Yes, the state of positionFixReceived and 
+    // positionFixAccepted will both change to No. 
+    // 
+    typedef struct tag_NavInsState_T
+    {
+      long alignTimeToGo;
+      boolean positionRequest;
+      boolean positionFixReceived;
+      boolean positionFixAccepted;
+      boolean zeroVelocityUpdateRequest;
+      boolean insCriticalFailure;
+      boolean odometerNotCompatible;
+      double positionError;
+      double insTimeToReadiness;
+    } NavInsState_T;
+
+
+
+    // This topic contains data on the position, time and movement of 
+    // the navigation system as well as a high level indication of 
+    // the state of the sensors used to generate that data. The data 
+    // provided is dependent on the capabilities of the navigation 
+    // system.
+    // 
+    struct NavPositionState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      double longitude;
+      double latitude;
+      double height;
+      NavErrorDataType_T positionError;
+      NavErrorDataType_T heightError;
+      double utcTimeOfDay;
+      String20_T date;
+      double distanceTravelled;
+      sequence<NavPositionParameterName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavPositionState_T navElementId navElementIdType
+
+
+
+
+    // This topic contains data on the velocity and heading of the 
+    // navigation system as well as a high level indication of the 
+    // state of the sensors used to generate that data. The data 
+    // provided is dependent on the capabilities of the navigation 
+    // system.
+    // 
+    struct NavVelocityHeadingState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      HeadingDataSet_T heading;
+      double xVelocity;
+      double yVelocity;
+      double zVelocity;
+      sequence<NavVelocityHeadingParameterName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavVelocityHeadingState_T navElementId navElementIdType
+
+
+
+    // Units are enumerated.
+    // 
+    enum  ModeSupportType_E
+    {
+      MODE_SUPPORT_TYPE__SUPPORTED,
+      MODE_SUPPORT_TYPE__NOT_SUPPORTED
+    };
+
+
+
+    // Status report from GPS Nav device
+    // 
+    typedef struct tag_NavGpsState_T
+    {
+      boolean gpsReady;
+      boolean gpsInitialisationFail;
+      boolean spoofersDetected;
+      double positionError;
+      boolean gpsCriticalFailure;
+    } NavGpsState_T;
+
+
+
+    // Gyro calibration parameters for the navigation sensor.
+    // 
+    enum  NavSensorGyroCalibrationVariables_E
+    {
+      NAV_SENSOR_GYRO_CALIBRATION_VARIABLES__X_GYRO_BIAS,
+      NAV_SENSOR_GYRO_CALIBRATION_VARIABLES__Y_GYRO_BIAS,
+      NAV_SENSOR_GYRO_CALIBRATION_VARIABLES__Z_GYRO_BIAS,
+      NAV_SENSOR_GYRO_CALIBRATION_VARIABLES__X_GYRO_SCALE_FACTOR_ERROR,
+      NAV_SENSOR_GYRO_CALIBRATION_VARIABLES__Y_GYRO_SCALE_FACTOR_ERROR,
+      NAV_SENSOR_GYRO_CALIBRATION_VARIABLES__Z_GYRO_SCALE_FACTOR_ERROR
+    };
+
+
+
+    // 
+    // 
+    enum  AngularExcursionLimitName_E
+    {
+      ANGULAR_EXCURSION_LIMIT_NAME__PITCH,
+      ANGULAR_EXCURSION_LIMIT_NAME__YAW,
+      ANGULAR_EXCURSION_LIMIT_NAME__ROLL
+    };
+
+
+
+    // A angular acceleration event will be generated when the 
+    // angular acceleration exceeds the set angular acceleration 
+    // threshold, see capability topic.
+    // 
+    struct NavAngularAccelerationEvent_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      boolean pitch;
+      boolean yaw;
+      boolean roll;
+      sequence<AngularExcursionLimitName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavAngularAccelerationEvent_T navElementId navElementIdType
+
+
+
+    // Currently set excursion threshold attributes and the command 
+    // status are conveyed by this topic. 
+    // 
+    struct NavSensorExcursionState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      double xLinearVelocity;
+      double yLinearVelocity;
+      double zLinearVelocity;
+      boolean xLinearAcceleration;
+      boolean yLinearAcceleration;
+      boolean zLinearAcceleration;
+      double pitchRate;
+      double yawRate;
+      double rollRate;
+      boolean pitchAcceleration;
+      boolean yawAcceleration;
+      boolean rollAcceleration;
+      sequence<NavExcursionParameterName_E,20> recentlyChanged;
+      CommandOperationStateType_E commandState;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavSensorExcursionState_T navElementId navElementIdType
+
+
+
+    // 
+    // 
+    enum  NavVelocityHeadingType_E
+    {
+      NAV_VELOCITY_HEADING_TYPE__HEADING_ONLY,
+      NAV_VELOCITY_HEADING_TYPE__VELOCITY_ONLY,
+      NAV_VELOCITY_HEADING_TYPE__HEADING_AND_VELOCITY,
+      NAV_VELOCITY_HEADING_TYPE__NONE_AVAILABLE
+    };
+
+
+
+    // 
+    // 
+    enum  NavPositionType_E
+    {
+      NAV_POSITION_TYPE__POSITION_WITH_ERROR_BUDGET,
+      NAV_POSITION_TYPE__HEIGHT_WITH_ERROR_BUDGET,
+      NAV_POSITION_TYPE__POSITION_AND_HEIGHT_WITH_ERROR_BUDGETS,
+      NAV_POSITION_TYPE__NONE_AVAILABLE
+    };
+
+
+ 
+    // 
+    // 
+    enum  NavAttitudeParameterName_E
+    {
+      NAV_ATTITUDE_PARAMETER_NAME__PITCH,
+      NAV_ATTITUDE_PARAMETER_NAME__ROLL,
+      NAV_ATTITUDE_PARAMETER_NAME__YAW,
+      NAV_ATTITUDE_PARAMETER_NAME__PITCH_RATE,
+      NAV_ATTITUDE_PARAMETER_NAME__ROLL_RATE,
+      NAV_ATTITUDE_PARAMETER_NAME__YAW_RATE
+    };
+
+
+
+    // This topic contains data on the attitude of the navigation 
+    // system as well as a high level indication of the state of the 
+    // sensors used to generate that data. The data provided is 
+    // dependent on the capabilities of the navigation system.
+    // 
+    struct NavAttitudeState_T
+    {
+      double pitch;
+      double roll;
+      double yaw;
+      double pitchRate;
+      double rollRate;
+      double yawRate;
+      long navElementId;
+      ResourceType_E navElementIdType;
+      sequence<NavAttitudeParameterName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavAttitudeState_T navElementId navElementIdType
+
+
+    // 
+    // 
+    enum  NavTimeAndDateType_E
+    {
+      NAV_TIME_AND_DATE_TYPE__UTC_TIME,
+      NAV_TIME_AND_DATE_TYPE__DATE,
+      NAV_TIME_AND_DATE_TYPE__UTC_TIME_AND_DATE,
+      NAV_TIME_AND_DATE_TYPE__NONE_AVAILABLE
+    };
+
+
+    // A velocity event will be generated when the linear velocity 
+    // exceeds the set velocity threshold, see capability topic.
+    // 
+    struct NavLinearVelocityEvent_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      double alongXAxis;
+      double alongYAxis;
+      double alongZAxis;
+      sequence<LinearExcursionLimitName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavLinearVelocityEvent_T navElementId navElementIdType
+
+
+    // Status reported by the navigation system on mode command.
+    // 
+    struct NavModeState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      ModeType_E controlMode;
+      CommandOperationStateType_E commandState;
+      double mainDataOutputFrequency;
+      double statusOutputFrequency;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavModeState_T navElementId navElementIdType
+
+
+
+    // The current selected coordinate system and the status of the 
+    // last command will be reflected by this topic.
+    // 
+    struct NavReferenceSystemState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      boolean referenceCoordinateSystemSelected;
+      boolean referenceCoordinateSystemUnavailable;
+      NavCoordinateSystem_T referenceCoordinateSystem;
+      HeadingDataSet_T northReference;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavReferenceSystemState_T navElementId navElementIdType
+
+
+
+
+
+
+    // A angular rate event will be generated when the angular rate 
+    // exceeds the set angular velocity threshold, see capability 
+    // topic.
+    // 
+    struct NavAngularRateEvent_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      double pitch;
+      double yaw;
+      double roll;
+      sequence<AngularExcursionLimitName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavAngularRateEvent_T navElementId navElementIdType
+
+
+
+    // This topic provides primary NAV system controls, and modes. 
+    // Actual available controls and modes will be dependent on the 
+    // specific implementation and technologies used.
+    // 
+    struct NavModeCommand_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      long requestorId;
+      ResourceType_E requestorIdType;
+      long referenceNum;
+      ModeType_E controlMode;
+      double mainDataOutputRate;
+      double statusOutputRate;
+      boolean commandZeroVelocityUpdate;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavModeCommand_T navElementId navElementIdType requestorId requestorIdType
+
+
+
+    // Status of the Inertial Navigation System's mode of operation. 
+    // Expected sequence on power-up is as follows:
+    // 
+    // initialising
+    // 
+    // ins Gyro Compassing
+    // 
+    // 	Not Ready
+    // 
+    // 	Degraded
+    // 
+    // 	Fully aligned
+    // 
+    // Nav Mode ( IND operating normally)
+    // 
+    enum  ModeStateType_E
+    {
+      MODE_STATE_TYPE__INS_INITIALISING,
+      MODE_STATE_TYPE__INS_GYRO_COMPASS_NOT_READY,
+      MODE_STATE_TYPE__INS_GYRO_COMPASS_DEGRADED,
+      MODE_STATE_TYPE__INS_GYRO_COMPASS_FULL,
+      MODE_STATE_TYPE__INS_NAV_MODE,
+      MODE_STATE_TYPE__INS_OFF
+    };
+
+
+
+
+    // Nav status will be published periodically. The periodicity can 
+    // be controlled via the Nav mode command.
+    // 
+    struct NavState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      NavGpsKeyedStatusType_E gpsKeyStatus;
+      NavResourceType_E resourceType;
+      NavGpsState_T gpsStatus;
+      NavInsState_T insStatus;
+      ModeStateType_E navModeStatus;
+      NavCoordinateSystem_T referenceCoordinateSystem;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavState_T navElementId navElementIdType
+
+
+    // The capabilities of this navigation unit.
+    // 
+    typedef struct tag_NavExcursionLimitCapabilities_T
+    {
+      NavAttitudeType_E supportedAngularRateLimitTriggers;
+      NavAttitudeType_E supportedAngularAccelerationLimitTriggers;
+      LinearExcursionLimitType_E supportedLinearVelocityLimitTriggers;
+      LinearExcursionLimitType_E supportedLinearAccelerationLimitTriggers;
+    } NavExcursionLimitCapabilities_T;
+
+
+
+    // The capabilities of navigation unit.
+    // 
+    struct NavCapabilities_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      sequence<NavCoordinateSystem_T,300> coordinates;
+      CommonCapability_T core;
+      ModeSupportType_E distanceCalculated;
+      double maximumDataCalculationRates;
+      NavAttitudeType_E navAttitude;
+      ModeSupportType_E navExcursionEvent;
+      NavExcursionLimitCapabilities_T navExcursionThresholds;
+      NavErrorType_E navHeightError;
+      ModeSupportType_E navInstallationCorrectedOutput;
+      NavPositionType_E navPosition;
+      NavErrorType_E navPositionError;
+      double navPowerConsumption;
+      NavSensorCalibrationType_E navSensorCalibration;
+      sequence<NavSensorCalibrationVariables_E,10> navSensorGyroCalibrationValues;
+      sequence<NavSensorInstallationCalibrationVariables_E,10> navSensorInstallationCalibrationValues;
+      NavTimeAndDateType_E navTimeAndDate;
+      NavVelocityHeadingType_E navVelocityHeading;
+      NavResourceType_E resourceType;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavCapabilities_T navElementId navElementIdType
+
+
+
+    // The navigation system calibration may be required as part of 
+    // maintenance cycle or whenever it is fitted or refitted to 
+    // different vehicles or different positions on vehicle. This 
+    // topic allows the measured calibration data to be downloaded to 
+    // the navigation unit. 
+    // 
+    // 
+    // The calibration feature supported is defined by the capability 
+    // topic attribute "navSensorCalibration".
+    // 
+    struct NavSensorCalibrationCommand_T
+    {
+      long navElementId;
+      ResourceType_E  navElementIdType;
+      long requestorId;
+      ResourceType_E requestorIdType;
+      long referenceNum;
+      sequence<NavSensorCalibrationValues_T,15> navSensorGyroCalibrationValues;
+      sequence<NavSensorCalibrationValues_T,15> navSensorInstallationCalibrationValues;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavSensorCalibrationCommand_T navElementId navElementIdType requestorId requestorIdType
+
+
+
+  };  
+};
+

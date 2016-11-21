@@ -1,0 +1,277 @@
+[0][1] Received NavAttitude : size = 256
+Received P/R/Y -2,00 -2,00 40,00
+id 1734161410, type 15, changed [2], time 1461832373 s 0 ns
+[0][1] Received NavAttitude : size = 256
+Received P/R/Y -4,00 -4,00 40,00
+id 1734161410, type 15, changed [0][1], time 6278522234269073408 s 0 ns
+[0][1] Received NavAttitude : size = 256
+Received P/R/Y 0,00 0,00 0,00
+id 1734161410, type 15, changed [0][3][1][4][2][5], time 6278581345903968256 s 0 ns
+[2][34][5d][67] [f][0][0][0] 
+[6][0][0][0] [0][0][0][0] 
+[3][0][0][0] [1][0][0][0] 
+[4][0][0][0] [2][0][0][0] 
+[5][0][0][0] [0][0][0][0] 
+
+[78][0][22][57] [0][0][0][0] [0][0][0][0]
+
+[2][34][5d][67] [f][0][0][0] [1][0][0][0] [2][0][0][0]                           [b5][ca][21][57] [0][0][0][0] [0][0][0][0]
+[2][34][5d][67] [f][0][0][0] [2][0][0][0] [0][0][0][0] [1][0][0][0] [0][0][0][0] [b5][ca][21][57] [0][0][0][0] [0][0][0][0]
+
+
+
+
+Pour une sequence, si la taille est de 1, l'élément suivant est le l'élément unique de la séquence, puis vient l'élément suivant la séquence.
+Par contre, si la taille est de plus de 1, il y a alors "taille" éléments suivant, suivi d'un entier à 0. Après cette valeur de 0 vient l'élément suivant la séquence. 
+En fait, selon la doc (The Real-time Publish-Subscribe Protocol (RTPS) DDS Interoperability Wire Protocol Specification Version 2.2), il est nécessaire de caller chaque 
+sous message sur des structures de 32 bits (4 octets).
+Du coup, je me pose la question du comment sont gérés les char, ...
+Par exemple, 5 booleans (indépendants, mais à la suite les uns des autres, et dans la même structure), ne prennent que 8 octets: 5 utiles, plus 3 de padding
+
+
+Platform capability:
+[2][34][5d][67] [f][0][0][0] 
+
+// Manufacturer "Sebi"
+[5][0][0][0]
+
+[53][65][62][69]
+[0][0][0][0] 
+// Product name "DDSSimulated"
+[d][0][0][0]
+
+[44][44][53][53] DDSS
+[69][6d][75][6c] imul
+[61][74][65][64] ated
+[0][0][0][0]
+
+// Description 0x19 = 16 + 9 = 25 = 6*4 + 1
+[19][0][0][0]
+
+[41][20][44][44] A DD
+[53][20][73][69] S si
+
+[6d][75][6c][61] mula
+[74][65][64][20] ted 
+
+[76][65][68][69] vehi
+[63][75][6c][65] cule
+
+[0][0][0][0]
+
+// Serial Number
+[3][0][0][0]
+[34][32][0][0] 42
+
+// issue
+[5][0][0][0]
+[6e][6f][6e][65] none
+[0][0][0][0]
+
+// modStrike ""
+[7][0][0][0]
+[4d][49][47][57] MIGW
+[41][59][0][0]   AY
+
+// natoStockNumber ""
+[1][0][0][0]
+[0][0][0][0]
+
+// Séquence 1 softwareversiondescriptor
+[1][0][0][0]
+// Softwaremodulename
+[5][0][0][0]
+[63][6f][72][65]  core
+[0][0][0][0]
+// Version number
+[4][0][0][0]
+[30][2e][31][0]   0.1
+// ModeCapability_T
+[1][1][1][1]      // 5 boolean true
+[1][0][0][0]
+// VsiTime_T
+[6f][16][22][57]  // long (8 bytes)
+[0][0][0][0]
+[0][0][0][0]      // int
+
+
+    // This topic contains data on the attitude of the navigation 
+    // system as well as a high level indication of the state of the 
+    // sensors used to generate that data. The data provided is 
+    // dependent on the capabilities of the navigation system.
+    // 
+    struct NavAttitudeState_T
+    {
+      double pitch;
+      double roll;
+      double yaw;
+      double pitchRate;
+      double rollRate;
+      double yawRate;
+      long navElementId;
+      ResourceType_E navElementIdType;
+      sequence<NavAttitudeParameterName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavAttitudeState_T navElementId navElementIdType
+
+ 
+    // 
+    // 
+    enum  NavAttitudeParameterName_E
+    {
+      NAV_ATTITUDE_PARAMETER_NAME__PITCH,
+      NAV_ATTITUDE_PARAMETER_NAME__ROLL,
+      NAV_ATTITUDE_PARAMETER_NAME__YAW,
+      NAV_ATTITUDE_PARAMETER_NAME__PITCH_RATE,
+      NAV_ATTITUDE_PARAMETER_NAME__ROLL_RATE,
+      NAV_ATTITUDE_PARAMETER_NAME__YAW_RATE
+    };
+
+    // This topic contains data on the position, time and movement of 
+    // the navigation system as well as a high level indication of 
+    // the state of the sensors used to generate that data. The data 
+    // provided is dependent on the capabilities of the navigation 
+    // system.
+    // 
+    struct NavPositionState_T
+    {
+      long navElementId;
+      ResourceType_E navElementIdType;
+      double longitude;
+      double latitude;
+      double height;
+      NavErrorDataType_T positionError;
+      NavErrorDataType_T heightError;
+      double utcTimeOfDay;
+      String20_T date;
+      double distanceTravelled;
+      sequence<NavPositionParameterName_E,10> recentlyChanged;
+      VsiTime_T timeOfDataGeneration;
+    };
+#pragma keylist NavPositionState_T navElementId navElementIdType
+    // 
+    // 
+    typedef struct tag_NavErrorDataType_T
+    {
+      double Error;
+      NavErrorType_E ErrorType;
+    } NavErrorDataType_T;
+    // Specification of what positional data is provided by the 
+    // navigation system.
+    // 
+    enum  NavPositionParameterName_E
+    {
+      NAV_POSITION_PARAMETER_NAME__LONGITUDE,
+      NAV_POSITION_PARAMETER_NAME__LATITUDE,
+      NAV_POSITION_PARAMETER_NAME__HEIGHT,
+      NAV_POSITION_PARAMETER_NAME__POSITION_ERROR,
+      NAV_POSITION_PARAMETER_NAME__HEIGHT_ERROR,
+      NAV_POSITION_PARAMETER_NAME__UTC_TIME_OF_DAY,
+      NAV_POSITION_PARAMETER_NAME__DATE,
+      NAV_POSITION_PARAMETER_NAME__DISTANCE_TRAVELLED
+    };
+
+    // The capability provided by the resource.
+    // 
+    struct PlatformCapability_T
+    {
+      long resourceId;
+      ResourceType_E resourceIdType;
+      CommonCapability_T coreCapability;
+    };
+#pragma keylist PlatformCapability_T resourceId resourceIdType
+  // This data type is used as a topic published by all resources.  
+  // Until some new mechanism is adopted it will also be included in 
+  // each specialised capability.
+  // 
+  typedef struct tag_CommonCapability_T
+  {
+    String50_T manufacturer;
+    String50_T productName;
+    String200_T description;
+    String50_T serialNumber;
+    String50_T issue;
+    String50_T modStrike;
+    String20_T natoStockNumber;
+    sequence<SoftwareVersionDescriptor_T,20> softwareVersions;
+    ModeCapability_T supportedModes;
+    VsiTime_T timeOfDataGeneration;
+  } CommonCapability_T;
+
+
+  // Describe the software modules and their respective version 
+  // numbers. 
+  // 
+  typedef struct tag_SoftwareVersionDescriptor_T
+  {
+    String50_T softwareModuleName;
+    String50_T versionNumber;
+  } SoftwareVersionDescriptor_T;
+  // Used to indicate whether each mode is supported by the resource.
+  // 
+  typedef struct tag_ModeCapability_T
+  {
+    boolean isOffCapable;
+    boolean isOnCapable;
+    boolean isStandbyCapable;
+    boolean isMaintenanceCapable;
+    boolean isTrainingCapable;
+  } ModeCapability_T;
+
+    
+  // An absolute representation of time using the same datum as and a 
+  // similar format to DDS::Time_t.
+  // 
+  typedef struct tag_VsiTime_T
+  {
+    long long seconds;
+    unsigned long nanoseconds;
+  } VsiTime_T;
+  
+  // An enumeration of all the possible resource types used in the 
+  // system
+  // 
+  enum  ResourceType_E
+  {
+    RESOURCE_TYPE__APPLICATION,
+    RESOURCE_TYPE__BRAKE,
+    RESOURCE_TYPE__CREWSTATION,
+    RESOURCE_TYPE__ACOUSTIC,
+    RESOURCE_TYPE__CAMERA,
+    RESOURCE_TYPE__ECM,
+    RESOURCE_TYPE__ENGINE,
+    RESOURCE_TYPE__ESM,
+    RESOURCE_TYPE__EXHAUST,
+    RESOURCE_TYPE__FUEL,
+    RESOURCE_TYPE__HUMS,
+    RESOURCE_TYPE__LRF,
+    RESOURCE_TYPE__LTD,
+    RESOURCE_TYPE__MET_SENSOR,
+    RESOURCE_TYPE__MOUNT,
+    RESOURCE_TYPE__NAV_UNIT,
+    RESOURCE_TYPE__NBC,
+    RESOURCE_TYPE__PLOT,
+    RESOURCE_TYPE__POWER,
+    RESOURCE_TYPE__RADAR,
+    RESOURCE_TYPE__RESOURCE_CONTROLLER,
+    RESOURCE_TYPE__RESOURCE_LIST,
+    RESOURCE_TYPE__ROUTE,
+    RESOURCE_TYPE__SLAVE_SETUP,
+    RESOURCE_TYPE__TRANSMISSION,
+    RESOURCE_TYPE__TURBO,
+    RESOURCE_TYPE__WEAPON,
+    RESOURCE_TYPE__CHARGER,
+    RESOURCE_TYPE__BATTERY,
+    RESOURCE_TYPE__GENERATOR,
+    RESOURCE_TYPE__FUEL_CELL,
+    RESOURCE_TYPE__INVERTER,
+    RESOURCE_TYPE__CONSUMER,
+    RESOURCE_TYPE__POWERNODE,
+    RESOURCE_TYPE__CHANNEL,
+    RESOURCE_TYPE__DETECTION,
+    RESOURCE_TYPE__TRACK,
+    RESOURCE_TYPE__DETECTION_CHARACTERISTICS,
+    RESOURCE_TYPE__TRACK_CHARACTERISTICS_RT
+  };
+

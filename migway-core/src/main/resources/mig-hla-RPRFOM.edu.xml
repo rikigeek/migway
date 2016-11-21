@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.OrientationStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>OrientationStruct</remoteName>
+    <elements>
+      <element field="psi">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Psi</sharedRemoteName>
+      </element>
+      <element field="theta">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Theta</sharedRemoteName>
+      </element>
+      <element field="phi">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Phi</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.SpatialStaticStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>SpatialStaticStruct</remoteName>
+    <elements>
+      <element field="worldLocation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.WorldLocationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>WorldLocation</sharedRemoteName>
+      </element>
+      <element field="isFrozen">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.RPRboolean</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>IsFrozen</sharedRemoteName>
+      </element>
+      <element field="orientation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.OrientationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Orientation</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.BaseEntity">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>BaseEntity</remoteName>
+    <elements>
+      <element field="spatial">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialVariantStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <remoteNames>Spatial</remoteNames>
+        <sharedRemoteName>spatial</sharedRemoteName>
+        <interfaces>HLA</interfaces>
+      </element>
+      <element field="relativeSpatial">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialVariantStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <remoteNames>RelativeSpatial</remoteNames>
+        <sharedRemoteName>relativeSpatial</sharedRemoteName>
+        <interfaces>HLA</interfaces>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.WorldLocationStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>WorldLocationStruct</remoteName>
+    <elements>
+      <element field="x">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>X</sharedRemoteName>
+      </element>
+      <element field="y">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Y</sharedRemoteName>
+      </element>
+      <element field="z">
+        <mig:basic>
+          <basicType>DOUBLE</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Z</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.VelocityVectorStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>VelocityVectorStruct</remoteName>
+    <elements>
+      <element field="xVelocity">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>XVelocity</sharedRemoteName>
+      </element>
+      <element field="yVelocity">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>YVelocity</sharedRemoteName>
+      </element>
+      <element field="zVelocity">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>ZVelocity</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.AccelerationVectorStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>AccelerationVectorStruct</remoteName>
+    <elements>
+      <element field="xAcceleration">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>XAcceleration</sharedRemoteName>
+      </element>
+      <element field="yAcceleration">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>YAcceleration</sharedRemoteName>
+      </element>
+      <element field="zAcceleration">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>ZAcceleration</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.AngularVelocityVectorStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>AngularVelocityVectorStruct</remoteName>
+    <elements>
+      <element field="xAngularVelocity">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>XAngularVelocity</sharedRemoteName>
+      </element>
+      <element field="yAngularVelocity">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>YAngularVelocity</sharedRemoteName>
+      </element>
+      <element field="zAngularVelocity">
+        <mig:basic>
+          <basicType>FLOAT</basicType>
+        </mig:basic>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>ZAngularVelocity</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.SpatialRPStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>SpatialRPStruct</remoteName>
+    <elements>
+      <element field="worldLocation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.WorldLocationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>WorldLocation</sharedRemoteName>
+      </element>
+      <element field="isFrozen">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.RPRboolean</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>IsFrozen</sharedRemoteName>
+      </element>
+      <element field="orientation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.OrientationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Orientation</sharedRemoteName>
+      </element>
+      <element field="velocityVector">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.VelocityVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>VelocityVector</sharedRemoteName>
+      </element>
+      <element field="angularVelocity">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.AngularVelocityVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>AngularVelocity</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.SpatialRVStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>SpatialRVStruct</remoteName>
+    <elements>
+      <element field="worldLocation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.WorldLocationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>WorldLocation</sharedRemoteName>
+      </element>
+      <element field="isFrozen">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.RPRboolean</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>IsFrozen</sharedRemoteName>
+      </element>
+      <element field="orientation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.OrientationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Orientation</sharedRemoteName>
+      </element>
+      <element field="velocityVector">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.VelocityVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>VelocityVector</sharedRemoteName>
+      </element>
+      <element field="accelerationVector">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.AccelerationVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>AccelerationVector</sharedRemoteName>
+      </element>
+      <element field="angularVelocity">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.AngularVelocityVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>AngularVelocity</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.SpatialFVStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>SpatialFVStruct</remoteName>
+    <elements>
+      <element field="worldLocation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.WorldLocationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>WorldLocation</sharedRemoteName>
+      </element>
+      <element field="isFrozen">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.RPRboolean</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>IsFrozen</sharedRemoteName>
+      </element>
+      <element field="orientation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.OrientationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Orientation</sharedRemoteName>
+      </element>
+      <element field="velocityVector">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.VelocityVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>VelocityVector</sharedRemoteName>
+      </element>
+      <element field="accelerationVector">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.AccelerationVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>AccelerationVector</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+  <unionStructure name="edu.cyc14.essais.pojo.rprfom.SpatialVariantStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>SpatialVariantStruct</remoteName>
+    <elements>
+      <element field="deadReckoningAlgorithm">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.DeadReckoningAlgorithmEnum8</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>DeadReckoningAlgorithm</sharedRemoteName>
+      </element>
+      <element field="spatialStatic">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialStaticStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialStatic</sharedRemoteName>
+      </element>
+      <element field="spatialFPB">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialFPStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialFPB</sharedRemoteName>
+      </element>
+      <element field="spatialFPW">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialFPStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialFPW</sharedRemoteName>
+      </element>
+      <element field="spatialFVB">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialRPStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialFVB</sharedRemoteName>
+      </element>
+      <element field="spatialFVW">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialRPStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialFVW</sharedRemoteName>
+      </element>
+      <element field="spatialRPB">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialFVStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialRPB</sharedRemoteName>
+      </element>
+      <element field="spatialRPW">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialFVStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialRPW</sharedRemoteName>
+      </element>
+      <element field="spatialRVB">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialRVStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialRVB</sharedRemoteName>
+      </element>
+      <element field="spatialRVW">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.SpatialRVStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>SpatialRVW</sharedRemoteName>
+      </element>
+    </elements>
+    <discriminant field="deadReckoningAlgorithm">
+      <mig:ref>
+        <structureName>edu.cyc14.essais.pojo.rprfom.DeadReckoningAlgorithmEnum8</structureName>
+      </mig:ref>
+      <bigEndian>false</bigEndian>
+      <sharedRemoteName>DeadReckoningAlgorithm</sharedRemoteName>
+    </discriminant>
+    <alternatives>
+      <entry>
+        <key>DRM_RVB</key>
+        <value>spatialRVB</value>
+      </entry>
+      <entry>
+        <key>DRM_FPW</key>
+        <value>spatialFPW</value>
+      </entry>
+      <entry>
+        <key>DRM_FPB</key>
+        <value>spatialFPB</value>
+      </entry>
+      <entry>
+        <key>DRM_RPW</key>
+        <value>spatialRPW</value>
+      </entry>
+      <entry>
+        <key>DRM_FVW</key>
+        <value>spatialFVW</value>
+      </entry>
+      <entry>
+        <key>DRM_RPB</key>
+        <value>spatialRPB</value>
+      </entry>
+      <entry>
+        <key>Static</key>
+        <value>spatialStatic</value>
+      </entry>
+      <entry>
+        <key>DRM_FVB</key>
+        <value>spatialFVB</value>
+      </entry>
+      <entry>
+        <key>DRM_RVW</key>
+        <value>spatialRVW</value>
+      </entry>
+    </alternatives>
+  </unionStructure>
+  <enumStructure name="edu.cyc14.essais.pojo.rprfom.DeadReckoningAlgorithmEnum8">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>DeadReckoningAlgorithmEnum8</remoteName>
+    <elements/>
+    <mig:basic>
+      <basicType>INT</basicType>
+    </mig:basic>
+    <enumElements>
+      <enumValue>Other</enumValue>
+      <enumValue>Static</enumValue>
+      <enumValue>DRM_FPW</enumValue>
+      <enumValue>DRM_RPW</enumValue>
+      <enumValue>DRM_RVW</enumValue>
+      <enumValue>DRM_FVW</enumValue>
+      <enumValue>DRM_FPB</enumValue>
+      <enumValue>DRM_RPB</enumValue>
+      <enumValue>DRM_RVB</enumValue>
+      <enumValue>DRM_FVB</enumValue>
+    </enumElements>
+  </enumStructure>
+  <enumStructure name="edu.cyc14.essais.pojo.rprfom.RPRboolean">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>RPRboolean</remoteName>
+    <elements/>
+    <mig:basic>
+      <basicType>INT</basicType>
+    </mig:basic>
+    <enumElements>
+      <enumValue>False</enumValue>
+      <enumValue>True</enumValue>
+    </enumElements>
+  </enumStructure>
+  <classStructure name="edu.cyc14.essais.pojo.rprfom.SpatialFPStruct">
+    <interfaceList>HLA</interfaceList>
+    <remoteName>SpatialFPStruct</remoteName>
+    <elements>
+      <element field="worldLocation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.WorldLocationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>WorldLocation</sharedRemoteName>
+      </element>
+      <element field="isFrozen">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.RPRboolean</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>IsFrozen</sharedRemoteName>
+      </element>
+      <element field="orientation">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.OrientationStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>Orientation</sharedRemoteName>
+      </element>
+      <element field="velocityVector">
+        <mig:ref>
+          <structureName>edu.cyc14.essais.pojo.rprfom.VelocityVectorStruct</structureName>
+        </mig:ref>
+        <bigEndian>false</bigEndian>
+        <sharedRemoteName>VelocityVector</sharedRemoteName>
+      </element>
+    </elements>
+  </classStructure>
+</mig:configuration>

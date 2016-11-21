@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>migway.demos</groupId>
+	<artifactId>migway-demo-ddsplatform</artifactId>
+	<parent>
+		<groupId>migway</groupId>
+		<artifactId>migway-demos</artifactId>
+		<version>0.6.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>migway.demo.dds.PlatformApp</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+<!-- 							<artifactSet> -->
+<!-- 								<includes> -->
+<!-- 									<include>org.slf4j:*</include> -->
+<!-- 								</includes> -->
+<!-- 							</artifactSet> -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>edu.cyc14.essais</groupId>
+			<artifactId>pojo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>migway</groupId>
+			<artifactId>migway-utils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.prismtech.cafe</groupId>
+			<artifactId>cafe-ddsi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.prismtech.cafe</groupId>
+			<artifactId>cafe-dds</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.prismtech</groupId>
+			<artifactId>opensplicedds</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

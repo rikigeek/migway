@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+  <mappings destination="edu.cyc14.essais.pojo.DdsPojo">
+    <source name="edu.cyc14.essais.pojo.MyPojo" />
+    <elementMappings>
+      <destination name="number">
+        <structureName>edu.cyc14.essais.pojo.DdsPojo</structureName>
+      </destination>
+      <source name="value">
+        <structureName>edu.cyc14.essais.pojo.MyPojo</structureName>
+      </source>
+    </elementMappings>
+    <elementMappings>
+      <destination name="acknowledged">
+        <structureName>edu.cyc14.essais.pojo.DdsPojo</structureName>
+      </destination>
+      <source name="ok">
+        <structureName>edu.cyc14.essais.pojo.MyPojo</structureName>
+      </source>
+    </elementMappings>
+    <elementMappings>
+      <destination name="description">
+        <structureName>edu.cyc14.essais.pojo.DdsPojo</structureName>
+      </destination>
+      <source name="name">
+        <structureName>edu.cyc14.essais.pojo.MyPojo</structureName>
+      </source>
+    </elementMappings>
+  </mappings>
+  <mappings destination="edu.cyc14.essais.pojo.MyPojo">
+    <source name="edu.cyc14.essais.pojo.DdsPojo" />
+    <elementMappings>
+      <destination name="value">
+        <structureName>edu.cyc14.essais.pojo.MyPojo</structureName>
+      </destination>
+      <source name="number">
+        <structureName>edu.cyc14.essais.pojo.DdsPojo</structureName>
+      </source>
+    </elementMappings>
+    <elementMappings>
+      <destination name="ok">
+        <structureName>edu.cyc14.essais.pojo.MyPojo</structureName>
+      </destination>
+      <source name="acknowledged">
+        <structureName>edu.cyc14.essais.pojo.DdsPojo</structureName>
+      </source>
+    </elementMappings>
+    <elementMappings>
+      <destination name="name">
+        <structureName>edu.cyc14.essais.pojo.MyPojo</structureName>
+      </destination>
+      <source name="description">
+        <structureName>edu.cyc14.essais.pojo.DdsPojo</structureName>
+      </source>
+    </elementMappings>
+  </mappings>
+</mig:configuration>

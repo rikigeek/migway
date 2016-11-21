@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mig:configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mig="http://migway.org/core/config">
+  <keyModels typeName="LDM.navigation.NavAttitudeState_T">
+    <keyElementList>navElementId</keyElementList>
+  </keyModels>
+  <keyModels typeName="LDM.navigation.NavPositionState_T">
+    <keyElementList>navElementId</keyElementList>
+  </keyModels>
+  <keyModels typeName="tanklab.Tank">
+    <keyElementList>instanceHandle</keyElementList>
+  </keyModels>
+</mig:configuration>
